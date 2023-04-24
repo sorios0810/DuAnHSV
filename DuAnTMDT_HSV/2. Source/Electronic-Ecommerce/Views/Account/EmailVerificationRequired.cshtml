@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Xác thực tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Assets/Client/js/send_email_verification.js"></script>
+}
+
+<!-- Begin Verify Required Area -->
+<main class="main">
+    <div class="page-content mt-3">
+        <div class="container">
+            <div class="form-box">
+                <div class="card-body">
+                    <!-- Verify Required -->
+                    <div class="login-form">
+                        <div class="login-title center">
+                            <h4 style="margin-left:-10px">Xác thực tài khoản của bạn</h4>
+                        </div>
+                        <div class="row">
+                            <div class="verify-required-content">
+                                <div class="frequently-desc">
+                                    <div class="verify-account-img center mb-3">
+                                        <img srcset="~/Images/it_service/gmail-logo-2561_1.png 2x" alt="Email" class="img" style="padding-left:10px" />
+                                    </div>
+                                    <div class="verify-account-content">
+                                        <p class="fs-15px mb-4">Cảm ơn bạn đã đăng ký tài khoản !</p>
+                                        <p>Chúng tôi đã gửi email đến <span class="text-danger">@ViewBag.Email</span></p>
+                                        <p class="mb-4">Để tiếp tục, vui lòng kiểm tra hộp thư và xác thực Email của bạn</p>
+                                        <div class="resent-email-message fs-14px">
+                                            <form id="formresend">
+                                                <input type="hidden" name="account_id" id="acc_id" value="@ViewBag.AccountID" />
+                                                <span>Nếu chưa nhận được Email ? Vui lòng </span><a onclick="sendmail()" id="resendid" class="Resend-email text-danger" style="cursor:pointer">gửi lại</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Verify Required Area End Here -->

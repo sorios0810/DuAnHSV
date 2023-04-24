@@ -1,0 +1,564 @@
+﻿@{
+    ViewBag.Title = "Tin tức công nghệ";
+    ViewBag.ImageURL = "/Images/ImagesCollection/tin-tuc.jpg";
+    ViewBag.Decription = "";
+    ViewBag.Tag = "Tin tức công nghệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //=> top bài viết thảo luận nhiểu
+    var topcomment = (List<Domain.Entities.New>)ViewBag.topcomment;
+    //=>top bài viết
+    var topnews = (List<Domain.Entities.New>)ViewBag.topnews;
+    //=> top sản phẩm được review
+    var productsreviews = (List<Domain.Entities.NewProduct>)ViewBag.productsreviews;
+    var product = (List<Domain.Entities.Product>)ViewBag.productnew;
+    //=> top mẹo hay
+    var tips = (List<Domain.Entities.ChildCategory>)ViewBag.tips;
+    //=>top thịnh hành
+    var trendingnow = (List<Domain.Entities.New>)ViewBag.trendingnow;
+    //=>danh sách tag
+    var listtag = (List<Domain.Entities.Tag>)ViewBag.listtag;
+    //=>bài viết host
+    var Hostpost = (List<Domain.Entities.New>)ViewBag.Hostpost;
+    //=>danh mục bài viết
+    var child_category = (List<Domain.Entities.ChildCategory>)ViewBag.childcategory;
+    //=> bài viết gần đây
+    var recentnews = (List<Domain.Entities.New>)ViewBag.recentnews;
+    //=>game
+    var game = (List<Domain.Entities.New>)ViewBag.gamepost;
+    //=>đếm comment
+    var countcomment = (List<Domain.Entities.NewComment>)ViewBag.countcomment;
+    //=>đếm rep comment
+    var replycountcomment = (List<Domain.Entities.ReplyComment>)ViewBag.replycountcomment;
+    //=>ghim bài
+    var stickyPosts = (List<Domain.Entities.StickyPost>)ViewBag.stickyPosts;
+    //=>get dấu chấm cho giá sản phẩm
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<link href="~/Assets/Client/css/ticker-style.css" rel="stylesheet" />
+@section scripts{
+    <script>
+        $(".regular").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,//hiện 4 ảnh
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+        });
+    </script>
+    <script src="~/Assets/Client/js/jquery.ticker.js"></script>
+    <script src="~/Assets/Client/js/custom_ticker.js"></script>
+}
+<style>
+    /*    .posts-list li {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    */
+    .entry-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+</style>
+<main class="main mt-2">
+    <div class="page-content">
+        <div class="trending-area fix">
+            <div class="container">
+                <div class="trending-main">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="trending-tittle">
+                                <strong>Trending now</strong>
+                                <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
+                                <div class="trending-animated">
+                                    <ul id="js-news" class="js-hidden">
+                                        @foreach (var item in trendingnow)
+                                        {
+                                            <li class="news-item"><a class="limit_lenght_trendingnow" href="/post/@item.slug">@item.news_title</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="row">
+                                @if (stickyPosts.Count() > 0)
+                                {
+                                    foreach (var item in stickyPosts)
+                                    {
+                                        <div class="trending-top">
+                                            <a href="/post/@item.New.slug">
+                                                <div class="trend-top-img">
+                                                    <div class="trending-top"></div>
+                                                    <img src="@item.New.image2" class="img_sticky" alt="@item.New.slug">
+                                                    <div class="trend-top-cap">
+                                                        <span>@item.New.ChildCategory.name</span>
+                                                        <p class="stickypost_home sticky_title">
+                                                            @item.New.news_title
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var item in Hostpost)
+                                    {
+                                        <div class="col-md-6 mb-1">
+                                            <div class="trending-top">
+                                                <a href="/post/@item.slug">
+                                                    <div class="trend-top-img">
+                                                        <div class="trending-top"></div>
+                                                        <img src="@item.image" alt="@item.slug" />
+                                                        <div class="trend-top-cap">
+                                                            <span>@item.ChildCategory.name</span>
+                                                            <p class="stickypost_home">
+                                                                @item.news_title
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!-- Riht content -->
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <ul class="posts-list">
+                                    @foreach (var news in ViewBag.post_ofnewscategory)
+                                    {
+                                        foreach (var item in child_category)
+                                        {
+                                            if (item.childcategory_id == news.childcategory_id)
+                                            {
+                                                <li>
+                                                    <div class="trand-right-single d-flex">
+                                                        <div class="trand-right-cap">
+                                                            <figure>
+                                                                <a href="/post/@news.slug">
+                                                                    <img src="@news.image" alt="@news.slug" style="height: 80px" />
+                                                                </a>
+                                                            </figure>
+                                                            <span class="color3 font-weight-bold">@item.name</span>
+                                                            <h4><a href="/post/@news.slug" class="recent-post-url">@news.news_title</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="regular slider">
+                <h2 class="title center text-uppercase">Top bài viết tháng</h2>
+                <div class="tab-content tab-content-carousel mt-2">
+                    <div class="tab-pane p-0 fade show active">
+                        <div class="owl-carousel owl-simple" data-toggle="owl"
+                             data-owl-options='{
+                            "nav": false,
+                            "dots": true,
+                            "items": 3,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "600": {
+                                    "items":2
+                                },
+                                "992": {
+                                    "items":3
+                                },
+                                "1280": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'>
+                            @foreach (var item in topnews)
+                            {
+                                <article class="entry">
+                                    <figure class="entry-media">
+                                        <a href="/post/@item.slug">
+                                            <img src="@item.image" alt="@item.news_title" />
+                                        </a>
+                                    </figure>
+                                    <div class="entry-body">
+                                        <div class="entry-meta">
+                                            @{
+                                                DateTime seconds = item.create_at.AddSeconds(60);
+                                                DateTime minutes = item.create_at.AddMinutes(60);
+                                                DateTime hour = item.create_at.AddHours(24);
+                                                DateTime date = item.create_at.AddDays(30);
+                                                DateTime months = item.create_at.AddMonths(12);
+                                            }
+                                            @if (seconds > DateTime.Now)
+                                            {
+                                                if ((item.create_at.Minute < DateTime.Now.Minute))
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @((DateTime.Now.Second - item.create_at.Second) +60) giây trước</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @(DateTime.Now.Second - item.create_at.Second) giây trước</a>
+                                                }
+                                            }
+                                            else if (minutes > DateTime.Now)
+                                            {
+                                                if ((item.create_at.Hour < DateTime.Now.Hour) || (item.create_at.Day < DateTime.Now.Day))
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @((DateTime.Now.Minute - item.create_at.Minute)+60) phút trước</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @(DateTime.Now.Minute - item.create_at.Minute) phút trước</a>
+                                                }
+                                            }
+                                            else if (hour > DateTime.Now)
+                                            {
+                                                if (item.create_at.Day < DateTime.Now.Day)
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @((DateTime.Now.Hour - item.create_at.Hour)+24) giờ trước</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @(DateTime.Now.Hour - item.create_at.Hour) giờ trước</a>
+                                                }
+                                            }
+                                            else if (date > DateTime.Now)
+                                            {
+                                                if ((item.create_at.Month < DateTime.Now.Month))
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @((DateTime.Now.Day - item.create_at.Day)+30) ngày trước</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @(DateTime.Now.Day - item.create_at.Day) ngày trước</a>
+                                                }
+                                            }
+                                            else if (months > DateTime.Now)
+                                            {
+                                                if ((item.create_at.Year < DateTime.Now.Year))
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @((DateTime.Now.Month - item.create_at.Month)+12) tháng trước</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#"><i class="icon-clock-o"></i> @(DateTime.Now.Month - item.create_at.Month) tháng trước</a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a href="#"><i class="icon-clock-o"></i> @item.create_at.ToString("dd/MM/yyyy")</a>
+                                            }
+                                            <span class="meta-separator">|</span>
+                                            <a href="#">@item.NewComments.Count() Đánh giá</a>
+                                        </div><!-- End .entry-meta -->
+
+                                        <h3 class="entry-title fs-15px">
+                                            <a href="/post/@item.slug">
+                                                @item.news_title
+                                            </a>
+                                        </h3><!-- End .entry-title -->
+
+                                        <div class="entry-cats">
+                                            Thể loại: <a href="#" class="font-weight-bold text-danger">@item.ChildCategory.name</a>
+                                        </div><!-- End .entry-cats -->
+                                    </div><!-- End .entry-body -->
+                                </article>
+                            }
+                        </div><!-- End .owl-carousel -->
+                    </div><!-- .End .tab-pane -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Whats New Start -->
+        <section class="whats-news-area pb-20 ">
+            <div class="container">
+                <div class="row pt-2 bt-1px">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-12 bb-1px">
+                                <div class="heading-left">
+                                    <h2 class="title">Thảo luận nhiều</h2>
+                                </div>
+                                <div class="whats-news-caption">
+                                    <div class="row">
+                                        @foreach (var item in topcomment)
+                                        {
+                                            <div class="col-lg-4">
+                                                <div class="single-what-news mb-100">
+                                                    <div class="what-img">
+                                                        <img src="@item.image" alt="">
+                                                    </div>
+                                                    <div class="what-cap">
+                                                        <span class="color3 font-weight-bold">
+                                                            @item.ChildCategory.name
+                                                            <i class="ms-2 me-1 icon-comments" aria-hidden="true"></i>
+                                                            @{
+                                                                int count__cmt = 0;
+                                                                int count__rep_cmt = 0;
+                                                            }
+                                                            @foreach (var com in countcomment)
+                                                            {
+                                                                if (com.news_id == item.news_id)
+                                                                {
+                                                                    count__cmt++;
+                                                                }
+                                                            }
+                                                            @foreach (var rep_com in replycountcomment)
+                                                            {
+                                                                if (rep_com.NewComment.news_id == item.news_id)
+                                                                {
+                                                                    count__rep_cmt++;
+                                                                }
+                                                            }
+                                                            @(count__cmt + count__rep_cmt)
+                                                        </span>
+                                                        <h4><a class="text-dark fs-16px" href="/post/@item.slug">@item.news_title</a></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-2">
+                                <div class="heading-left">
+                                    <h2 class="title">Bài viết mới</h2><!-- End .title -->
+                                </div>
+                                @foreach (var item in recentnews)
+                                {
+                                    DateTime dateTime = DateTime.Now;
+                                    <article class="entry entry-list">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-5">
+                                                <figure class="entry-media">
+                                                    <a href="/post/@item.slug">
+                                                        <img src="@item.image" alt="Post" />
+                                                    </a>
+                                                </figure><!-- End .entry-media -->
+                                            </div><!-- End .col-md-5 -->
+
+                                            <div class="col-md-7">
+                                                <div class="entry-body">
+                                                    <div class="entry-meta">
+                                                        <span class="entry-author">
+                                                            bởi <a href="#">@item.Account.Name</a>
+                                                        </span>
+                                                        <span class="meta-separator">|</span>
+                                                        @{
+                                                            DateTime seconds = item.create_at.AddSeconds(60);
+                                                            DateTime minutes_1 = item.create_at.AddMinutes(60);
+                                                            DateTime hour_1 = item.create_at.AddHours(24);
+                                                            DateTime date = item.create_at.AddDays(30);
+                                                            DateTime months = item.create_at.AddMonths(12);
+                                                        }
+                                                        @if (seconds > DateTime.Now)
+                                                        {
+                                                            if ((item.create_at.Minute < DateTime.Now.Minute))
+                                                            {
+                                                                <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @((DateTime.Now.Second - item.create_at.Second) +60) giây trước</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @(DateTime.Now.Second - item.create_at.Second) giây trước</a>
+                                                            }
+                                                        }
+                                                        else if (minutes_1 > DateTime.Now)
+                                                        {
+                                                            if ((item.create_at.Hour < DateTime.Now.Hour) || (item.create_at.Day < DateTime.Now.Day))
+                                                            {
+                                                                <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @((DateTime.Now.Minute - item.create_at.Minute)+60) phút trước</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @(DateTime.Now.Minute - item.create_at.Minute) phút trước</a>
+                                                            }
+                                                        }
+                                                        else if (hour_1 > DateTime.Now)
+                                                        {
+                                                            if (item.create_at.Day < DateTime.Now.Day)
+                                                            {
+                                                                <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @((DateTime.Now.Hour - item.create_at.Hour)+24) giờ trước</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @(DateTime.Now.Hour - item.create_at.Hour) giờ trước</a>
+                                                            }
+                                                        }
+                                                        else if (date > DateTime.Now)
+                                                        {
+                                                            if ((item.create_at.Month < DateTime.Now.Month))
+                                                            {
+                                                                <a class="text-muted fs-14px"><i class="icon-clock-o"></i> @((DateTime.Now.Day - item.create_at.Day)+30) ngày trước</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="text-muted fs-14px"><i class="icon-clock-o"></i> @(DateTime.Now.Day - item.create_at.Day) ngày trước</a>
+                                                            }
+                                                        }
+                                                        else if (months > DateTime.Now)
+                                                        {
+                                                            if ((item.create_at.Year < DateTime.Now.Year))
+                                                            {
+                                                                <a class="text-muted fs-14px"><i class="icon-clock-o"></i> @((DateTime.Now.Month - item.create_at.Month)+12) tháng trước</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="text-muted fs-14px"><i class="icon-clock-o"></i> @(DateTime.Now.Month - item.create_at.Month) tháng trước</a>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" class="text-muted fs-14px"><i class="icon-clock-o"></i> @item.create_at.ToString("dd/MM/yyyy")</a>
+                                                        }
+                                                        <span class="meta-separator">|</span>
+                                                        <a href="#">@item.NewComments.Count() Đánh giá</a>
+                                                    </div><!-- End .entry-meta -->
+
+                                                    <h2 class="entry-title">
+                                                        <a href="/post/@item.slug">@item.news_title</a>
+                                                    </h2><!-- End .entry-title -->
+
+                                                    <div class="entry-cats">
+                                                        Thể loại: <a href="#" class="text-danger">@item.ChildCategory.name</a>
+                                                    </div><!-- End .entry-cats -->
+
+                                                    <div class="entry-content">
+                                                        <p class="recent-post-url">@item.meta_title...</p>
+                                                        <a href="/post/@item.slug" class="read-more">Xem tiếp</a>
+                                                    </div><!-- End .entry-content -->
+                                                </div><!-- End .entry-body -->
+                                            </div><!-- End .col-md-7 -->
+                                        </div><!-- End .row -->
+                                    </article>
+                                }
+                                <div class="center mt-3 mb-10">
+                                    <a href="@Url.Action("AllListNews","New")" class="btn btn-outline-primary-2 fs-16px">Xem thêm bài viết <i class="icon-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget widget_latestposts bb-1px">
+                            <h3 class="widget-title">Đánh giá sản phẩm</h3>
+                            @foreach (var products in product)
+                            {
+                                string image = ""; double price = 0; string productname = ""; int countpost = 0; string product_slug = "";
+                                foreach (var news in productsreviews)
+                                {
+                                    if (news.product_id == products.product_id)
+                                    {
+                                        countpost = products.NewProducts.Count;
+                                        image = products.image;
+                                        price = products.selling_price;
+                                        productname = products.product_name;
+                                        product_slug = products.slug;
+                                        if (products.Discount.discount_start < DateTime.Now && products.Discount.discount_end > DateTime.Now && products.Discount.status == "1")
+                                        {
+                                            price = products.selling_price - products.Discount.discount_price;
+                                        }
+                                        else
+                                        {
+                                            price = products.selling_price;
+                                        }
+                                    }
+
+                                }
+                                <ul class="posts-list">
+                                    <li>
+                                        <a href="/new/product/@products.slug" class="recent-post-url">
+                                            <figure>
+                                                <img src="@products.image" alt="blog-1" />
+                                            </figure>
+                                            <div>
+                                                <span class="text-secondary">@products.product_name</span>
+                                                <h4>
+                                                    @if (products.Discount != null)
+                                                    {
+                                                        if (products.Discount.discount_start < DateTime.Now && products.Discount.discount_end > DateTime.Now && products.Discount.status.Trim() == "1")
+                                                        {
+                                                            <span class="old-price">@products.selling_price.ToString("#,###₫", culture.NumberFormat) ( @countpost bài viết )</span>
+                                                            <span class="new-price">@((products.selling_price - products.Discount.discount_price).ToString("#,###₫", culture.NumberFormat)) ( @countpost bài viết )</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="new-price">@products.selling_price.ToString("#,###₫", culture.NumberFormat) ( @countpost bài viết )</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="new-price">@products.selling_price.ToString("#,###₫", culture.NumberFormat) ( @countpost bài viết )</span>
+                                                    }
+                                                </h4>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                        <div class="widget widget_latestposts bb-1px">
+                            <h3 class="widget-title">Góc game thủ</h3>
+                            <div class="featured-posts">
+                                <!-- /.sidebar-title -->
+                                @foreach (var item in game)
+                                {
+                                    <div class="sidebar-posts mb-10px">
+                                        <div class="card">
+                                            <a href="/post/@item.slug">
+                                                <div class="card-image mb-2">
+                                                    <img src="@item.image2" alt="Image" />
+                                                </div>
+                                                <!-- /.card-image -->
+                                                <div class="card-content w100dt">
+                                                    <p class="tag left w100dt l-blue">@item.ChildCategory.name</p>
+                                                    <p class="card-title post-url-side-bar limit_line_post">@item.news_title</p>
+                                                </div>
+                                                <!-- /.card-content -->
+                                            </a>
+                                        </div>
+                                        <!-- /.sidebar-posts -->
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h3 class="widget-title">Tags</h3>
+                            <div class="tagcloud">
+                                @foreach (var item in listtag)
+                                {
+                                    <a href="/tags/@item.slug">@item.tag_name</a>
+                                }
+                            </div>
+                        </div><!-- Widget : Tags /- -->
+                    </div><!-- Widget Area /- -->
+                </div>
+            </div>
+        </section>
+        <!-- Whats New End -->
+    </div>
+</main>

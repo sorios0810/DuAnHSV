@@ -1,0 +1,227 @@
+﻿@using Electronic_Ecommerce.Common.Helpers
+@using Electronic_Ecommerce.Common
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<style>
+    svg {
+        overflow: hidden;
+        vertical-align: middle;
+        fill: #fff;
+        width: 18px;
+        margin-right: 10px;
+    }
+</style>
+
+<header class="header header-10 header-intro-clearance">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-left" style="font-weight:600">
+                <a href="tel:#"><i class="icon-phone"></i><span> Liên hệ: +0123 456 789</span></a>
+            </div><!-- End .header-left -->
+
+            <div class="header-right">
+                @if (User.Identity.IsAuthenticated == false)
+                {
+                    <div class="login">
+                        @*<a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i> Tài khoản</a>*@
+                        <a href="@Url.Action("SignIn", "Account")" style="font-weight:600; min-width:25em">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.529 13.582">
+                                <path d="M7.265 8.544a4.272 4.272 0 1 0-4.248-4.28 4.263 4.263 0 0 0 4.248 4.28Zm0-7.28a3 3 0 1 1-2.985 3 3 3 0 0 1 2.985-3.001Zm1.974 7.691a.635.635 0 0 0-.6.126l-1.374 1.168-1.374-1.168a.643.643 0 0 0-.6-.126c-.884.284-5.29 1.8-5.29 4a.634.634 0 0 0
+                                              .632.632H13.9a.634.634 0 0 0 .632-.632c-.003-2.2-4.409-3.716-5.293-4.001ZM1.6 12.318a10.773 10.773 0 0 1 3.759-2.037l1.5 1.279a.624.624 0 0 0
+                                              .821 0l1.5-1.279a11.312 11.312 0 0 1 3.759 2.037Z">
+                                </path>
+                            </svg>Đăng nhập / Đăng ký
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    if (User.Identity.GetRole() != 1)
+                    {
+                        <div class="login">
+                            <div class="header-dropdown">
+                                <a href="@Url.Action("EditProfile", "Account")" style="font-weight:600">Xin chào: @User.Identity.GetName()</a>
+                                <div class="header-menu">
+                                    <ul>
+                                        <li><a href="@Url.Action("DashBoard", "Admin")" class="font-weight-bold text-danger"><i class="icon-squarespace"></i> Truy cập trang quản trị</a></li>
+                                        <li><a href="@Url.Action("EditProfile", "Account")">Thông tin tài khoản</a></li>
+                                        <li><a href="@Url.Action("TrackingOrder", "Account")">Quản lý đơn hàng</a></li>
+                                        <li><a href="@Url.Action("ChangePassword", "Account")">Đổi mật khẩu</a></li>
+                                        <li><a href="@Url.Action("AddressManager", "Account")">Sổ địa chỉ</a></li>
+                                        <li><a href="@Url.Action("Logout", "Account")">Đăng xuất</a></li>
+                                    </ul>
+                                </div><!-- End .header-menu -->
+                            </div><!-- End .header-dropdown -->
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="login">
+                            <div class="header-dropdown">
+                                <a href="@Url.Action("EditProfile", "Account")" style="font-weight:600">Xin chào: @User.Identity.GetName()</a>
+                                <div class="header-menu">
+                                    <ul>
+                                        <li><a href="@Url.Action("EditProfile", "Account")">Thông tin tài khoản</a></li>
+                                        <li><a href="@Url.Action("TrackingOrder", "Account")">Quản lý đơn hàng</a></li>
+                                        <li><a href="@Url.Action("ChangePassword", "Account")">Đổi mật khẩu</a></li>
+                                        <li><a href="@Url.Action("AddressManager", "Account")">Sổ địa chỉ</a></li>
+                                        <li><a href="@Url.Action("Logout", "Account")">Đăng xuất</a></li>
+                                    </ul>
+                                </div><!-- End .header-menu -->
+                            </div><!-- End .header-dropdown -->
+                        </div>
+                    }
+                }
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-top -->
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a href="/" class="logo">
+                    <img src="~/Assets/Client/images/logohsv_khongnen.png" alt="Heathcare Solution VietNam Logo" width="250" height="25">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search header-search-extended header-search-visible header-search-no-radius d-none d-lg-block">
+                    @if (ViewContext.RouteData.Values["Controller"].ToString() != "New")
+                    {
+                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                        <form action="@Url.Action("SearchResult", "Product")" method="get">
+                            <div class="header-search-wrapper search-wrapper-wide">
+                                <label for="s" class="sr-only">Search</label>
+                                <input type="text" class="form-control" name="s" id="product_name" placeholder="Bạn kiếm sản phẩm nào ?" required />
+                                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                                @*<div class="ui-autocomplete-loading"></div>*@
+                            </div><!-- End .header-search-wrapper -->
+                        </form>
+                    }
+                    else
+                    {
+                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                        <form action="@Url.Action("SearchResult", "New")" method="get">
+                            <div class="header-search-wrapper search-wrapper-wide">
+                                <label for="s" class="sr-only">Search</label>
+                                <input type="search" class="form-control" name="s" id="news_title" placeholder="Bạn kiếm bài viết nào ?" required />
+                                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                                @*<div class="ui-autocomplete-loading"></div>*@
+                            </div><!-- End .header-search-wrapper -->
+                        </form>
+                    }
+                </div><!-- End .header-search -->
+            </div>
+
+            <div class="header-right">
+                <div class="header-dropdown-link">
+                    <div class="dropdown compare-dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Xem các chi nhánh của cửa hàng" aria-label="Compare Products">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span class="compare-txt">Cửa hàng</span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <ul class="compare-products">
+                                <li class="compare-product">
+                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                    <h4 class="compare-product-title"><a href="product.html">Blue Night Dress</a></h4>
+                                </li>
+                                <li class="compare-product">
+                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                    <h4 class="compare-product-title"><a href="product.html">White Long Skirt</a></h4>
+                                </li>
+                            </ul>
+
+                            <div class="compare-actions">
+                                <a href="#" class="action-link">Clear All</a>
+                                <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i class="icon-long-arrow-right"></i></a>
+                            </div>
+                        </div><!-- End .dropdown-menu -->
+                    </div><!-- End .compare-dropdown -->
+
+                    <a href="@Url.Action("TrackingOrder", "Account")" class="wishlist-link" title="Xem đơn hàng">
+                        <i class="bi bi-bag-check-fill"></i>
+                        @*<span class="wishlist-count">3</span>*@
+                        <span class="wishlist-txt">Đơn hàng</span>
+                    </a>
+
+                    <div class="dropdown cart-dropdown">
+                        <a href="@Url.Action("ViewCart", "Cart")" id="goToCart" class="dropdown-toggle" title="Giỏ hàng">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="cart-count" id="lblCartCount">0</span>
+                            <span class="cart-txt">Giỏ hàng</span>
+                        </a>
+                        <!--<div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-cart-products">-->
+                                <!-- Hiển thị sản phẩm trong giỏ hàng -->
+                                <!--<p class="empty-cart-message fs-13px" style="align-items:center">Không có sản phẩm nào trong giỏ.</p>
+                            </div>
+                        </div>-->
+                    </div><!-- End .cart-dropdown -->
+                </div>
+            </div>
+        </div><!-- End .header-right -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+            <div class="header-left">
+                @Html.Action("NavigationBar", "Product")
+            </div><!-- End .col-lg-3 -->
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows">
+                        <li class="active">
+                            <a href="/">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="#" class="sf-with-ul">Thông tin</a>
+
+                            <ul>
+                                <li><a href="">Giới thiệu</a></li>
+                                <li><a href="">Tuyển dụng</a></li>
+                                <li><a href="">Hệ thống Showroom</a></li>
+                                <li>
+                                    <a href="" class="sf-with-ul">Chính sách cửa hàng</a>
+
+                                    <ul>
+                                        <li><a href="">Chính sách thanh toán</a></li>
+                                        <li><a href="">Chính sách trả góp</a></li>
+                                        <li><a href="">Chính sách hoàn trả</a></li>
+                                        <li><a href="">Chính sách vận chuyển</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="sf-with-ul">Dịch vụ</a>
+
+                            <ul>
+                                <li><a href="">Dịch vụ bảo hành</a></li>
+                                <li><a href="">Chăm sóc khách hàng</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("NewsIndex", "New")" class="sf-with-ul">Tin tức</a>
+                            <ul>
+                                @Html.Action("ListCategory", "New")
+                            </ul>
+                        </li>
+                        <li><a href="">Liên hệ</a></li>
+                        <li><a href="">Khuyến mãi</a></li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .col-lg-9 -->
+            <div class="header-right">
+                <i class="la la-lightbulb-o"></i><p><span>Giảm giá đến 30%</span></p>
+            </div>
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+</header><!-- End .header -->

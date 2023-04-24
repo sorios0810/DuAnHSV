@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title>Email xác nhận dăng ký tài khoản</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/Client/css/Email/email-template.css" />
+   
+</head>
+
+<body>
+    <center style="width: 100%; background-color: #f1f1f1;">
+        <div style="max-width: 600px; margin: 0 auto;" class="email-container">
+            <!-- BEGIN BODY -->
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+                <tr>
+                    <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td class="logo" style="text-align: center;">
+                                    <h1><a href="#"><img style="width: 150px; height: auto; object-fit: cover;" src="https://res.cloudinary.com/van-nam/image/upload/v1635520203/SourcesWeb/favicon2_kz5ag9.png" /></a></h1>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr><!-- end tr -->
+                <tr>
+                    <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
+                        <img src="https://res.cloudinary.com/van-nam/image/upload/v1635525562/SourcesWeb/email_evumkh.png" alt="" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
+                    </td>
+                </tr><!-- end tr -->
+                <tr>
+                    <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="text" style="padding: 0 2.5em; text-align: center;">
+                                        <h2>{{ViewBag.Sendmail}}</h2>
+                                        <h3 style="font-size:20px;margin-top:10px;">{{ViewBag.bodytext}}</h3>
+                                        <p><a href="{{viewBag.Confirmlink}}" class="btn btn-primary" style="background-color: #005ec4;">{{ViewBag.confirmtext}}</a></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr><!-- end tr -->
+                <!-- 1 Column Text + Button : END -->
+            </table>
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+                <tr>
+                    <td valign="middle" class="bg_light footer email-section">
+                        <table>
+                            <tr>
+                                <td valign="top" width="33.333%" style="padding-top: 20px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr>
+                                            <td style="text-align: left; padding-right: 10px;">
+                                                <h3 class="heading">Giới Thiệu</h3>
+                                                <p>Chuyên cung cấp: linh kiện, laptop, phụ kiện,... giá rẻ nhất thị trường</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="top" width="33.333%" style="padding-top: 20px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr>
+                                            <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
+                                                <h3 class="heading">Liên hệ</h3>
+                                                <ul>
+                                                    <li><span class="text">64 Đường số 2, KDC Him Lam, Phường Tân Hưng, Quận 7, TP. Hồ Chí Minh</span></li>
+                                                    <li><span class="text">(+84) 907.632.112</span></li>
+                                                    <li><span class="text"><a href="mailto:support@nvtcomputer.tech" style="color: rgba(0,0,0,.5);">info@hsv.com.vn</a></span></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="top" width="33.333%" style="padding-top: 20px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr>
+                                            <td style="text-align: left; padding-left: 10px;">
+                                                <h3 class="heading">Liên kết</h3>
+                                                <ul>
+                                                    <li><a href="/">Trang chủ</a></li>
+                                                    <li><a href="">Tin tức</a></li>
+                                                    <li><a href="">Hỗ trợ</a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr><!-- end: tr -->
+                <tr>
+                    <td class="bg_light" style="text-align: center;">
+                        <p>Nếu bạn không muốn nhận tin nữa? Bấm vào <a href="#" style="color: rgba(0,0,0,.8); font-weight: 500;">Huỷ đăng ký</a></p>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </center>
+</body>
+</html>

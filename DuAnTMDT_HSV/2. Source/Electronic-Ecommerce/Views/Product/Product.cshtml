@@ -1,0 +1,566 @@
+﻿@using Domain.Entities
+@using PagedList
+@model IPagedList<Domain.Entities.Product>
+
+@{
+    ViewBag.ImageURL = "/Images/ImagesCollection/san-pham.jpg";
+    ViewBag.Decription = "Laptop, linh kiện, phụ kiện, máy trạm,... chính hãng";
+    ViewBag.Tag = "";
+    ViewBag.Title = ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //tính đánh giá trung bình
+    var AvgFeedback = (List<Domain.Entities.Feedback>)ViewBag.AvgFeedback;
+    //sản phẩm
+    string defaultImg = "/Content/Images/no-image.jpg";
+    //chuyên đổi dạng tiên tệ. get dấu chấm cho giá của sản phẩm
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('/Assets/Client/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">@ViewBag.Type<span>Danh mục sản phẩm</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@ViewBag.Type</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="container">
+            <div class="toolbox" style="background-color: transparent">
+                <div class="toolbox-left">
+                    <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Bộ lọc</a>
+                </div>
+
+                <div class="toolbox-center">
+                    <div class="toolbox-info">
+                        @ViewBag.Type <span>@ViewBag.Countproduct</span> Sản phẩm
+                    </div><!-- End .toolbox-info -->
+                </div><!-- End .toolbox-left -->
+
+                <div class="toolbox-right">
+                    <div class="toolbox-sort">
+                        <label for="sortby">Lọc theo:</label>
+                        <div class="select-custom">
+                            <select class="form-control" id="mySelect" onchange="selectOption(this.value)">
+                                <option value="reset">Làm mới bộ lọc</option>
+                                <option value="old-new">Cũ - Mới</option>
+                                <option value="buy">Mua nhiều</option>
+                                <option value="view">Xem nhiều</option>
+                                <option value="discount">Giảm theo %</option>
+                                <option value="price">Giá (Thấp > Cao)</option>
+                                <option value="name">Tên (A - Z)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products">
+                <div class="row">
+                    @if (Model.Count == 0)
+                    {
+                        <div class="col-12 col-md-10 col-lg-10 col-xl-9">
+                            <h1 class="fs-20px text-center text-danger">Xin lỗi ! Chúng tôi không tìm thấy bất kỳ kết quả nào với từ khóa trên.</h1>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                                <div class="product">
+                                    <figure class="product-media">
+                                        @*<span class="product-label label-new">New</span>*@
+                                        <a href="/product/@item.slug">
+                                            <img src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name" class="product-image" />
+                                            @if (item.Discount != null)
+                                            {
+                                                if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                                {
+                                                    <div class="discount-tag">
+                                                        <div class="pd-discount-tag color-less25percent">
+                                                            <div class="tag-title">
+                                                                Tiết kiệm
+                                                            </div>
+                                                            <div class="discount-price-tag">
+                                                                @item.Discount.discount_price.ToString("#,###₫", culture.NumberFormat)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </a>
+
+                                        <div class="product-action-vertical">
+                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>Yêu thích</span></a>
+                                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Xem nhanh"><span>Xem nhanh</span></a>
+                                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                        </div><!-- End .product-action-vertical -->
+
+                                        <div class="product-action">
+                                            <a href="#" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+                                        </div><!-- End .product-action -->
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a href="#">SKU: @item.model</a>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title"><a href="/product/@item.slug">@item.product_name</a></h3><!-- End .product-title -->
+                                        <div class="product-price">
+                                            @if (item.Discount != null)
+                                            {
+                                                if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                                {
+                                                    <span class="old-price">@item.selling_price.ToString("#,###₫", culture.NumberFormat)</span>
+                                                    <span class="new-price">@((item.selling_price - item.Discount.discount_price).ToString("#,###₫", culture.NumberFormat))</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="new-price">@item.selling_price.ToString("#,###₫", culture.NumberFormat)</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span class="new-price">@item.selling_price.ToString("#,###₫", culture.NumberFormat)</span>
+                                            }
+                                        </div><!-- End .product-price -->
+                                        <div class="ratings-container">
+                                            @{
+                                                double onestar = 1; int c_ontstar = 0; double truestar = 2; int c_truestar = 0;
+                                                double threestar = 3; int c_threestar = 0; ; double fourstar = 4; int c_fourstar = 0;
+                                                double fivestar = 5; int c_fivestar = 0; int totalrating = 0;
+                                                foreach (var avg in AvgFeedback)
+                                                {
+                                                    if (avg.product_id == item.product_id && avg.status == "2" && avg.parent_feedback_id == 0)
+                                                    {
+                                                        totalrating++;
+                                                        if (avg.rate_star == 1)
+                                                        {
+                                                            c_ontstar++;
+                                                        }
+                                                        if (avg.rate_star == 2)
+                                                        {
+                                                            c_truestar++;
+                                                        }
+                                                        if (avg.rate_star == 3)
+                                                        {
+                                                            c_threestar++;
+                                                        }
+                                                        if (avg.rate_star == 4)
+                                                        {
+                                                            c_fourstar++;
+                                                        }
+                                                        if (avg.rate_star == 5)
+                                                        {
+                                                            c_fivestar++;
+                                                        }
+                                                    }
+                                                }
+                                                if ((((onestar * c_ontstar / totalrating) + (truestar * c_truestar / totalrating) +
+                                                (threestar * c_threestar / totalrating) + (fourstar * c_fourstar / totalrating) +
+                                                (fivestar * c_fivestar / totalrating)) >= 1) && (((onestar * c_ontstar / totalrating) +
+                                                (truestar * c_truestar / totalrating) + (threestar * c_threestar / totalrating) +
+                                                (fourstar * c_fourstar / totalrating) + (fivestar * c_fivestar / totalrating)) < 2))
+                                                {
+                                                    <div class="rating">
+                                                        <div class="center">
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            @for (int i = 1; i < 5; i++)
+                                                            {
+                                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if ((((onestar * c_ontstar / totalrating) + (truestar * c_truestar / totalrating) +
+                                                (threestar * c_threestar / totalrating) + (fourstar * c_fourstar / totalrating) +
+                                                (fivestar * c_fivestar / totalrating)) >= 2) && (((onestar * c_ontstar / totalrating) +
+                                                (truestar * c_truestar / totalrating) + (threestar * c_threestar / totalrating) +
+                                                (fourstar * c_fourstar / totalrating) + (fivestar * c_fivestar / totalrating)) < 3))
+                                                {
+                                                    <div class="rating">
+                                                        <div class="center">
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            @for (int i = 1; i < 4; i++)
+                                                            {
+                                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if ((((onestar * c_ontstar / totalrating) + (truestar * c_truestar / totalrating) +
+                                                 (threestar * c_threestar / totalrating) + (fourstar * c_fourstar / totalrating) +
+                                                 (fivestar * c_fivestar / totalrating)) >= 3) && (((onestar * c_ontstar / totalrating) +
+                                                 (truestar * c_truestar / totalrating) + (threestar * c_threestar / totalrating) +
+                                                 (fourstar * c_fourstar / totalrating) + (fivestar * c_fivestar / totalrating)) < 4))
+                                                {
+                                                    <div class="rating">
+                                                        <div class="center">
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            @for (int i = 1; i < 3; i++)
+                                                            {
+                                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if ((((onestar * c_ontstar / totalrating) + (truestar * c_truestar / totalrating) +
+                                                 (threestar * c_threestar / totalrating) + (fourstar * c_fourstar / totalrating) +
+                                                 (fivestar * c_fivestar / totalrating)) >= 4) && (((onestar * c_ontstar / totalrating) +
+                                                 (truestar * c_truestar / totalrating) + (threestar * c_threestar / totalrating) +
+                                                 (fourstar * c_fourstar / totalrating) + (fivestar * c_fivestar / totalrating)) < 5))
+                                                {
+                                                    <div class="rating">
+                                                        <div class="center">
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                            @for (int i = 1; i < 2; i++)
+                                                            {
+                                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else if (((onestar * c_ontstar / totalrating) + (truestar * c_truestar / totalrating) +
+                                                   (threestar * c_threestar / totalrating) + (fourstar * c_fourstar / totalrating) +
+                                                   (fivestar * c_fivestar / totalrating)) == 5)
+                                                {
+                                                    <div class="rating">
+                                                        <div class="center">
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                <i class="icon-star" aria-hidden="true"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="rating">
+                                                        <div class="center">
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            }
+                                            <span class="ratings-text">( @ViewBag.CountFeedback Đánh giá )</span>
+                                        </div><!-- End .rating-container -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div>
+                        }
+                    }
+                </div><!-- End .row -->
+            </div><!-- End .products -->
+            @if (ViewBag.Countproduct > 8)
+            {
+                @Html.Partial("Pager", Model)
+            }
+            <div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
+            <aside class="sidebar-shop sidebar-filter">
+                <div class="sidebar-filter-wrapper">
+                    <div class="widget widget-clean">
+                        <label><i class="icon-close"></i>Filters</label>
+                        <a href="#" class="sidebar-filter-clear">Clean All</a>
+                    </div><!-- End .widget -->
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                Category
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-1">
+                            <div class="widget-body">
+                                <div class="filter-items filter-items-count">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-1">
+                                            <label class="custom-control-label" for="cat-1">Dresses</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">3</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-2">
+                                            <label class="custom-control-label" for="cat-2">T-shirts</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">0</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-3">
+                                            <label class="custom-control-label" for="cat-3">Bags</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">4</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-4">
+                                            <label class="custom-control-label" for="cat-4">Jackets</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">2</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-5">
+                                            <label class="custom-control-label" for="cat-5">Shoes</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">2</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-6">
+                                            <label class="custom-control-label" for="cat-6">Jumpers</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">1</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-7">
+                                            <label class="custom-control-label" for="cat-7">Jeans</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">1</span>
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cat-8">
+                                            <label class="custom-control-label" for="cat-8">Sportwear</label>
+                                        </div><!-- End .custom-checkbox -->
+                                        <span class="item-count">0</span>
+                                    </div><!-- End .filter-item -->
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                                Size
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-2">
+                            <div class="widget-body">
+                                <div class="filter-items">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-1">
+                                            <label class="custom-control-label" for="size-1">XS</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-2">
+                                            <label class="custom-control-label" for="size-2">S</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" checked id="size-3">
+                                            <label class="custom-control-label" for="size-3">M</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" checked id="size-4">
+                                            <label class="custom-control-label" for="size-4">L</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-5">
+                                            <label class="custom-control-label" for="size-5">XL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="size-6">
+                                            <label class="custom-control-label" for="size-6">XXL</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true" aria-controls="widget-3">
+                                Colour
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-3">
+                            <div class="widget-body">
+                                <div class="filter-colors">
+                                    <a href="#" style="background: #b87145;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" style="background: #f0c04a;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" style="background: #333333;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" class="selected" style="background: #cc3333;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" style="background: #3399cc;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" style="background: #669933;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" style="background: #f2719c;"><span class="sr-only">Color Name</span></a>
+                                    <a href="#" style="background: #ebebeb;"><span class="sr-only">Color Name</span></a>
+                                </div><!-- End .filter-colors -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+                                Brand
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-4">
+                            <div class="widget-body">
+                                <div class="filter-items">
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-1">
+                                            <label class="custom-control-label" for="brand-1">Next</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-2">
+                                            <label class="custom-control-label" for="brand-2">River Island</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-3">
+                                            <label class="custom-control-label" for="brand-3">Geox</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-4">
+                                            <label class="custom-control-label" for="brand-4">New Balance</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-5">
+                                            <label class="custom-control-label" for="brand-5">UGG</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-6">
+                                            <label class="custom-control-label" for="brand-6">F&F</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                    <div class="filter-item">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="brand-7">
+                                            <label class="custom-control-label" for="brand-7">Nike</label>
+                                        </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .filter-item -->
+
+                                </div><!-- End .filter-items -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+
+                    <div class="widget widget-collapsible">
+                        <h3 class="widget-title">
+                            <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                Price
+                            </a>
+                        </h3><!-- End .widget-title -->
+
+                        <div class="collapse show" id="widget-5">
+                            <div class="widget-body">
+                                <div class="filter-price">
+                                    <div class="filter-price-text fs-14px">
+                                        Price Range:
+                                        <span id="filter-price-range"></span>
+                                    </div><!-- End .filter-price-text -->
+
+                                    <div id="price-slider"></div><!-- End #price-slider -->
+                                </div><!-- End .filter-price -->
+                            </div><!-- End .widget-body -->
+                        </div><!-- End .collapse -->
+                    </div><!-- End .widget -->
+                </div><!-- End .sidebar-filter-wrapper -->
+            </aside><!-- End .sidebar-filter -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main>
+<script>
+    function selectOption(optionValue) {
+        var url = "";
+        switch (optionValue) {
+            case "reset":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.ResetSort })";
+                break;
+            case "old-new":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.DateSortParm })";
+                break;
+            case "buy":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.BuySortParm })";
+                break;
+            case "view":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.ViewSortParm })";
+                break;
+            case "discount":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.DiscountSortParm })";
+                break;
+            case "price":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.PriceSortParm })";
+                break;
+            case "name":
+                url = "@Url.Action(ViewBag.UrlType, "Product", new { s = ViewBag.Search, sortOrder = ViewBag.NameSortParm })";
+                break;
+        }
+        localStorage.setItem("selectedOption", optionValue); // lưu giá trị của option được chọn vào localStorage
+            window.location.href = url;
+    }
+    // Gán giá trị mặc định cho option được chọn khi trang được tải lại
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectedOption = localStorage.getItem("selectedOption");
+        if (selectedOption !== null) {
+            var select = document.getElementById("mySelect");
+            select.value = selectedOption;
+        }
+    });
+</script>

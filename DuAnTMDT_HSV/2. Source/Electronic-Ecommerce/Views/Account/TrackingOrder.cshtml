@@ -1,0 +1,235 @@
+﻿@using Electronic_Ecommerce.Common.Helpers
+@using Domain.Entities
+@using PagedList.Mvc
+@model PagedList.IPagedList<Domain.Entities.Order>
+@{
+
+    ViewBag.Title = "Danh sách đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+@section scripts{
+    <script src="~/Assets/Client/js/order-search.js"></script>
+}
+
+<style>
+    a:hover {
+        color: #4DB848;
+        text-decoration: none;
+    }
+
+    .total {
+        display: inline-flex;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+</style>
+@if (User.Identity.IsAuthenticated)
+{
+    <main class="main">
+        <div class="page-content mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-3 col-xl-3">
+                        @Html.Partial("_NavbarProfile")
+                    </div>
+                    <div class="col-12 col-lg-9 col-xl-9 mb-10px">
+                        <div class="user-page">
+                            <div class="user-form" style="max-width:100%">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div class="page-title text-uppercase mb-3">
+                                        <h4 class="text-right ">Đơn hàng của bạn</h4>
+                                    </div>
+                                </div>
+                                <div class="toolbox">
+                                    <div class="toolbox-left">
+                                        <div class="toolbox-sort">
+                                            <label for="sortby">Bộ lọc:</label>
+                                            <div class="select-custom">
+                                                <select id="mySelect" onchange="selectOption(this.value)" class="form-control">
+                                                    <option value="reset">Làm mới bộ lọc</option>
+                                                    <option value="old-new">Đơn hàng (Mới - Cũ)</option>
+                                                    <option value="low-high">Trị giá (Thấp - Cao)</option>
+                                                    <option value="waiting">Chờ xử lý</option>
+                                                    <option value="processing">Đang xử lý</option>
+                                                    <option value="complete">Hoàn thành</option>
+                                                    <option value="cancel">Đã hủy</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="toolbox-right">
+                                        <div class="toolbox-sort">
+                                            <label for="search">Tìm kiếm:</label>
+                                            <div class="widget-search">
+                                                <form action="@Url.Action("TrackingOrder", "Account")" method="get">
+                                                    <label for="s" class="sr-only">Search</label>
+                                                    <input type="search" name="search" id="order_id" placeholder="Bạn muốn kiếm đơn hàng nào ?" class="ui-autocomplete-input form-control" autocomplete="off" style="width: 300px" />
+                                                    <button type="submit" class="btn">
+                                                        <i class="icon-search"></i>
+                                                        <span class="sr-only">Search</span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model.Count == 0)
+                                {
+                                    <div class="col-12">
+                                        <p class="h5 text-danger center">Không có đơn hàng nào :((</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="user-order">
+                                        <div class="order-list">
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="order-item">
+                                                    <div class="status-order">
+                                                        <a class="order-title" href="@Url.Action("TrackingOrderDetail", "Account", new {id = item.order_id})">
+                                                            <div class="id">
+                                                                Đơn hàng <strong>#</strong><strong>@item.order_id</strong>
+                                                            </div>
+                                                            <div class="des mt-1">
+                                                                Ngày đặt: @item.oder_date.ToString("dd-MM-yyyy HH:mm:ss")
+                                                            </div>
+                                                            @if (item.payment_transaction == "1" && item.status == "1")
+                                                            {
+                                                                <div class="status alert-secondary">Chưa thanh toán</div>
+                                                            }
+                                                            else
+                                                            {
+                                                                if (item.status == "3")
+                                                                {
+                                                                    <div class="status alert-success">Hoàn thành</div>
+                                                                }
+                                                                else if (item.status == "1")
+                                                                {
+                                                                    <div class="status alert-warning">Chờ xử lý</div>
+                                                                }
+                                                                else if (item.status == "2")
+                                                                {
+                                                                    <div class="status alert-info">Đang xử lý</div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="status alert-danger">Đơn hàng đã bị hủy</div>
+                                                                }
+                                                            }
+                                                        </a>
+                                                    </div>
+                                                    <div class="order-product order-product-detail mt-2" id="style-5">
+                                                        @foreach (var itemoder in ViewBag.itemOrder)
+                                                        {
+                                                            if (item.order_id == itemoder.order_id)
+                                                            {
+                                                                foreach (var p in ViewBag.productOrder)
+                                                                {
+                                                                    if (p.product_id == itemoder.product_id)
+                                                                    {
+                                                                        <a class="product" href="@Url.Action("TrackingOrderDetail", "Account", new {id = item.order_id})">
+                                                                            <div class="img"><img src="@p.image" alt="" class="product-image" /></div>
+                                                                            <div class="caption">
+                                                                                <div class="name">
+                                                                                    @p.product_name
+                                                                                </div>
+                                                                                <div class="amount">
+                                                                                    Số lượng: @itemoder.quantity
+                                                                                </div>
+                                                                                <div class="price">
+                                                                                    Giá tiền:
+                                                                                    <div class="new">@itemoder.price.ToString("#,###₫", culture.NumberFormat) </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        <div class="total">
+                                                            <label class="labels fs-16px">Tổng tiền: 
+                                                                <span class="value text-danger">
+                                                                    @if (item.payment_id != 1 && item.payment_transaction == "2")
+                                                                    {
+                                                                        <span>0₫</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span>@item.total.ToString("#,0₫", culture.NumberFormat)</span>
+                                                                    }
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>                                                   
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            @if (Model.Count != 0)
+                            {
+                                <div class="col-md-12 pagination justify-content-center fs-14px mt-3">
+                                    @Html.PagedListPager(Model, page => Url.Action("TrackingOrder", new { page, sortOrder = ViewBag.CurrentSort }), new PagedListRenderOptions
+                                    {
+                                        LinkToPreviousPageFormat = "<i class='icon-long-arrow-left'></i> Trở lại",
+                                        LinkToNextPageFormat = "Tiếp theo <i class='icon-long-arrow-right'></i>",
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 5,
+                                        EllipsesFormat = "&#8230;" // Thêm dấu "..." giữa các trang
+                                    })
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+}
+<script>
+    function selectOption(optionValue) {
+      var url = "";
+      switch (optionValue) {
+        case "reset":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.ResetSort })";
+          break;
+        case "old-new":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.DateSortParm })";
+          break;
+        case "low-high":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.PriceSortParm})";
+          break;
+        case "waiting":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.WaitingSortParm })";
+          break;
+        case "processing":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.ProcessingSortParm })";
+          break;
+        case "complete":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.CompleteSortParm })";
+          break;
+        case "cancel":
+          url = "@Url.Action("TrackingOrder", "Account", new { sortOrder = ViewBag.CancelSortParm })";
+          break;
+      }
+      localStorage.setItem("selectedOption", optionValue); // lưu giá trị của option được chọn vào localStorage
+      window.location.href = url;
+    }
+
+    // Gán giá trị mặc định cho option được chọn khi trang được tải lại
+    document.addEventListener("DOMContentLoaded", function() {
+      var selectedOption = localStorage.getItem("selectedOption");
+      if (selectedOption !== null) {
+        var select = document.getElementById("mySelect");
+        select.value = selectedOption;
+      }
+    });
+</script>

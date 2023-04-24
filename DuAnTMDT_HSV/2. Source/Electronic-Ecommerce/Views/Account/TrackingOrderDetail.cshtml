@@ -1,0 +1,434 @@
+﻿@model Electronic_Ecommerce.DTOs.OrderDTO
+@using Electronic_Ecommerce.Common.Helpers
+
+@{
+    ViewBag.Title = "Thông tin đơn hàng - #" + Model.order_id;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var product_order = (List<Domain.Entities.OrderDetail>)ViewBag.product_orderdetail;
+    var CheckExistFb = (List<Domain.Entities.Feedback>)ViewBag.CheckExistFb;
+    var CheckEditOrder = (List<Domain.Entities.OrderDetail>)ViewBag.CheckEditOrder;
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    TempData["OrderID"] = Model.order_id;
+}
+
+@section scripts{
+    <script src="~/Assets/Client/js/rating_product.js"></script>
+    <script src="~/Assets/Client/js/address_manager.js"></script>
+    <script src="~/Assets/Client/js/user_order_detail.js"></script>
+}
+
+<style>
+    .border-bottom {
+        border-bottom: 1px dashed #dee2e6 !important;
+        padding-bottom: 15px;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <main class="main">
+        <div class="page-content mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-3 col-xl-3">
+                        @Html.Partial("_NavbarProfile")
+                    </div>
+                    <div class="col-12 col-lg-9 col-xl-9 mb-10px">
+                        <div class="user-page addresslist">
+                            <div class="user-form">
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <div class="page-title text-uppercase mb-3">
+                                        <h6>Đơn hàng <span class="font-weight-bold" style="color: #18a0c6"> #@Model.order_id</span></h6>
+                                    </div>
+                                </div>
+                                <div class="user-order">
+                                    <div class="order-list">
+                                        <div class="order-item">
+                                            <div class="status-order">
+                                                <a class="order-title">
+                                                    <div class="des">
+                                                        @Model.order_date.ToString("dd-MM-yyyy HH:mm:ss")
+                                                    </div>
+                                                    @if (Model.payment_transaction == "1" && Model.status == "1")
+                                                    {
+                                                        <div class="status alert-secondary order_cancel">Chưa thanh toán</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        if (Model.status == "3")
+                                                        {
+                                                            <div class="status alert-success">Hoàn thành</div>
+                                                        }
+                                                        else if (Model.status == "1")
+                                                        {
+                                                            <div class="status alert-warning order_cancled">Chờ xử lý</div>
+                                                        }
+                                                        else if (Model.status == "2")
+                                                        {
+                                                            <div class="status alert-info">Đang xử lý</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="status alert-danger">Đơn hàng đã bị hủy</div>
+                                                        }
+                                                    }
+                                                </a>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 mt-2 mb-2">
+                                                    <div class="order-information">
+                                                        <div class="widget">
+                                                            <h4 class="widget-title title">Thông tin đặt hàng</h4>
+                                                            <ul class="widget-list">
+                                                                <li>Tên người đặt: <strong>@Model.Name</strong></li>
+                                                                <li>Điện thoại: @Model.Phone</li>
+                                                                <li>
+                                                                    Phương thức vận chuyển: Giao hàng tiết kiệm (<strong>Phí: 30.000đ</strong>)
+                                                                </li>
+                                                                <li>
+                                                                    Phương thức thanh toán: @Model.payment_name
+                                                                    @if (Model.payment_transaction == "1" && (Model.payment_id == 2 || Model.payment_id == 6))
+                                                                    {
+                                                                        <span class="text-warning">(Chưa thanh toán)</span>
+                                                                    }
+                                                                    else if (Model.payment_id == 2 || Model.payment_id == 6)
+                                                                    {
+                                                                        <span class="text-success">(Đã thanh toán)</span>
+                                                                    }
+                                                                </li>
+                                                                @if (Model.payment_transaction == "2" && Model.status == "1" && Model.payment_id == 1)
+                                                                {
+                                                                    <li class="remove_order_cancel mt-1">
+                                                                        <button class="btn btn-outline-danger" id="open_cancel_order" type="button"><span>Hủy đơn hàng</span></button>
+                                                                    </li>
+                                                                }
+                                                                else if (Model.status == "1" && Model.payment_transaction == "1" && (Model.payment_id == 2 || Model.payment_id == 6))
+                                                                {
+                                                                    <li class="remove_order_cancel">Chọn phương thức thanh toán lại:</li>
+                                                                    <li class="remove_order_cancel">
+                                                                        <form action="@Url.Action("ChangePayment", "PaymentMethod")" method="post">
+                                                                            @if (Model.payment_id == 2)
+                                                                            {
+                                                                                <div class="select-custom">
+                                                                                    <select class="form-control">
+                                                                                        <option value="1" id="cod__check" style="cursor: pointer">Thanh toán khi nhận hàng</option>
+                                                                                        <option value="2" id="vnpay__check" style="cursor: pointer" selected="selected">VNPay</option>
+                                                                                        <option value="6" id="paypal__check" style="cursor: pointer">PayPal</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="d-flex">
+                                                                                    <button class="userpanel-btn btn-success repaid-button" type="submit">Thanh toán lại</button>
+                                                                                    <button class="userpanel-btn btn-success repaid-button2 ms-1" id="open_cancel_order" type="button">Hủy đơn hàng</button>
+                                                                                </div>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <div class="select-custom">
+                                                                                    <select class="form-control">
+                                                                                        <option value="1" id="cod__check" style="cursor: pointer">Thanh toán khi nhận hàng</option>
+                                                                                        <option value="2" id="vnpay__check" style="cursor: pointer">VNPay</option>
+                                                                                        <option value="6" id="paypal__check" style="cursor: pointer" selected="selected">PayPal</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-sm-12 d-flex center">
+                                                                                    <div class="form-group">
+                                                                                        <button class="btn btn-outline-danger" id="open_cancel_order" type="button"><span>Hủy đơn hàng</span></button>
+                                                                                        <button class="btn btn-outline-primary-2" type="submit"><span>Thanh toán lại</span></button>
+                                                                                    </div>                                                                              
+                                                                                </div>
+                                                                            }
+                                                                        </form>
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 mt-2 mb-2">
+                                                    <div class="order-information">
+                                                        <div class="widget">
+                                                            <h4 class="widget-title title">Thông tin người nhận hàng</h4>
+                                                            <ul class="widget-list">
+                                                                <li><strong class="update_user_name">@Model.order_address_username</strong></li>
+                                                                <li class="update_phone">
+                                                                    Điện thoại: @Model.order_address_phonenumber
+                                                                </li>
+                                                                <li class="update_address">
+                                                                    Địa chỉ: @Model.order_address_content, @Model.order_address_ward, @Model.order_address_district, @Model.order_address_province
+                                                                    <a href="#" onclick="Edit(@Model.order_address_id, '@Model.order_address_username', '@Model.order_address_phonenumber', '@Model.order_address_province', '@Model.order_address_district', '@Model.order_address_ward', '@Model.order_address_content')" id="#EditOrderAddress" class="text-info remove_order_cancel remove_adress">
+                                                                        @if (Model.order_address_times_edit == 0 && Model.status == "1")
+                                                                        {
+                                                                            <span class="msg_update_order_address">(Cập nhật địa chỉ nhận hàng)</span>
+                                                                        }
+                                                                    </a>
+                                                                </li>
+                                                                @if (Model.order_note != null)
+                                                                {
+                                                                    <li>Ghi chú: @Model.order_note</li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="order-product order-product-detail">
+                                                @foreach (var item in product_order)
+                                                {
+                                                    <div class="product" href="/product/@item.Product.slug">
+                                                        <a href="/product/@item.Product.slug">
+                                                            <div class="img"><img src="@item.Product.image" alt=""></div>
+                                                        </a>
+                                                        <div class="caption">
+                                                            <div class="name">
+                                                                <a href="/product/@item.Product.slug">
+                                                                    @item.Product.product_name
+                                                                </a>
+                                                                @{
+                                                                    int check_oder = 0;
+                                                                    int check_fb = 0;
+                                                                }
+                                                                @foreach (var orderdetail in CheckEditOrder)
+                                                                {
+                                                                    if (orderdetail.product_id == item.product_id)
+                                                                    {
+                                                                        check_oder++;
+                                                                        foreach (var fb in CheckExistFb)
+                                                                        {
+                                                                            if (fb.product_id == item.product_id)
+                                                                            {
+                                                                                check_fb++;
+                                                                            }
+                                                                        }
+
+                                                                    }
+                                                                }
+                                                                @if (check_oder > 0)
+                                                                {
+                                                                    if (check_fb == 0)
+                                                                    {
+                                                                        <div class="ms-2 d-inline-block text-info" style="cursor: pointer" onclick="OdRating(@Model.order_id,@item.product_id, @item.genre_id)">( <i class="icon-comments"></i> Đánh giá )</div>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="amount">
+                                                                Số lượng: @item.quantity
+                                                            </div>
+                                                            <div class="price">
+                                                                Giá tiền:
+                                                                <div class="new">@item.price.ToString("#,0₫", culture.NumberFormat)</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="order-total">
+                                                <div class="group">
+                                                    <div class="labels">Tạm tính</div>
+                                                    <div class="value">@Model.temporary.ToString("#,###₫", culture.NumberFormat)</div>
+                                                </div>
+                                                <div class="group">
+                                                    <div class="labels">Giảm giá</div>
+                                                    @if (Model.discount_price == 0)
+                                                    {
+                                                        <div class="value discount-total">0₫</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        if (Model.discount_type == 3)
+                                                        {
+
+                                                            if (((Model.temporary * Model.discount_price) / 100) >= Model.discount_max)
+                                                            {
+                                                                <span class="value discount-total text-success">@Model.discount_max.ToString("-#,###₫", culture.NumberFormat)</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="value discount-total text-success">@(((Model.temporary*Model.discount_price)/100).ToString("-#,###₫", culture.NumberFormat))</span>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="value discount-total text-success">@Model.discount_price.ToString("-#,###₫", culture.NumberFormat)</div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="group">
+                                                    <div class="labels">
+                                                        Phí vận chuyển
+                                                    </div>
+                                                    <div class="value shipping-total">30.000₫</div>
+                                                </div>
+                                                <div class="group total font-weight-bold">
+                                                    <div class="labels">
+                                                        Tổng tiền
+                                                    </div>
+                                                    <div class="value">
+                                                        @if (Model.payment_id != 1 && Model.payment_transaction == "2")
+                                                        {
+                                                            <span>0₫</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@Model.total_price.ToString("#,0₫", culture.NumberFormat)</span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+}
+
+<!--begin::edit address-->
+<div class="modal fade" id="EditOrderAddress">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chỉnh sửa địa chỉ nhận hàng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="address-form" style="margin: 15px">
+                    <form method="post">
+                        <div class="row mt-2 border-bottom">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="labels">Họ tên <small class="text-danger">(*)</small></label>
+                                    <input type="text" class="form-control" value="@Model.order_address_username" id="name_order_address" placeholder="Nhập họ tên" name="account_address_username">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="labels">Số điện thoại <small class="text-danger">(*)</small></label>
+                                    <input type="text" class="form-control" value="@Model.order_address_phonenumber" id="phone_order_address" placeholder="Số điện thoại" name="account_address_phonenumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1 border-bottom">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Tỉnh/Thành phố <small class="text-danger">(*)</small></label>
+                                    <input type="text" class="form-control" value="@Model.order_address_province" id="province_order_address" placeholder="Nhập Tỉnh/Thành phố" name="account_address_content">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Quận/Huyện <small class="text-danger">(*)</small></label>
+                                    <input type="text" class="form-control" value="@Model.order_address_district" id="district_order_address" placeholder="Nhập Quận/huyện" name="account_address_content">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Phường/Xã <small class="text-danger">(*)</small></label>
+                                    <input type="text" class="form-control" value="@Model.order_address_ward" id="ward_order_address" placeholder="Nhập xã/phường" name="account_address_content">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="labels">Địa chỉ cụ thể <small class="text-danger">(*)</small></label>
+                                    <input type="text" class="form-control" value="@Model.order_address_content" id="order_address_content" placeholder="Nhập địa chỉ cụ thể" name="account_address_content">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2 text-center">
+                            <div class="form-group">
+                                <button type="reset" class="btn btn-outline-secondary font-weight-bold text-uppercase">
+                                    <span>Làm mới</span>
+                                </button>
+                                <button type="button" id="btnaddressedit" class="btn btn-outline-primary-2 font-weight-bold text-uppercase">
+                                    <span>Lưu</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::edit address-->
+<!--begin::cancel order-->
+<div class="modal fade" id="cancel_my_order" tabindex="-1">
+    <div class="modal-dialog modal-sm w-100" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="pt-3 pb-3">
+                    <h4 class="fs-20px text-danger">Chắc chắn hủy đơn hàng ?</h4>
+                    Bấm <span class="font-weight-bold">'Xác nhận'</span> để hủy hoặc <span class="font-weight-bold">'Quay lại'</span> để bỏ qua
+                </div>
+                <form hidden id="formcancel_order" method="post">
+                    <input name="order_id" value="@Model.order_id" />
+                </form>
+                <div class="column-gap-md-3 d-flex center">
+                    <button type="button" id="btn__back" class="btn text-danger font-weight-bold"><span class="material-icons fs-30px">cancel</span>Hủy bỏ</button>
+                    <button type="button" id="btn_cancel__order" class="btn text-success font-weight-bold"><span class="icon-check-circle-o fs-30px"></span>Xác nhận</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--end::cancel order-->
+<!--begin::rating product-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h5 font_roboto_medium" id="exampleModalLongTitle">Đánh giá sản phẩm</h5>
+                <button type="button" class="close" id="modelclose" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="RatingFromData" method="post" enctype="multipart/form-data" onsubmit="AjaxPost2(this)">
+                    <div onmouseout="CRateSelected()" class="star_ratingfb">
+                        <i id="rate1" onmouseout="CRateOut(1)" onmouseover="CRateOver(1)" onclick="CRateClick(1)" class="fa fa-star-o" aria-hidden="true"></i>
+                        <i id="rate2" onmouseout="CRateOut(2)" onmouseover="CRateOver(2)" onclick="CRateClick(2)" class="fa fa-star-o" aria-hidden="true"></i>
+                        <i id="rate3" onmouseout="CRateOut(3)" onmouseover="CRateOver(3)" onclick="CRateClick(3)" class="fa fa-star-o" aria-hidden="true"></i>
+                        <i id="rate4" onmouseout="CRateOut(4)" onmouseover="CRateOver(4)" onclick="CRateClick(4)" class="fa fa-star-o" aria-hidden="true"></i>
+                        <i id="rate5" onmouseout="CRateOut(5)" onmouseover="CRateOver(5)" onclick="CRateClick(5)" class="fa fa-star-o" aria-hidden="true"></i>
+                    </div>
+                    <input hidden name="product_id" class="form-control" id="ProD_ID">
+                    <input hidden name="genre_id" class="form-control" id="Genre_ID">
+                    <input hidden name="rate_star" class="form-control" id="lblRating">
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Nội dung đánh giá:</label>
+                        <textarea disabled maxlength="200" rows="3" placeholder="Viết đánh giá của bạn tại đây" class="form-control form-control-solid cursor-disable write_content_fb" name="description" id="FBk_Content"></textarea>
+                        <div id="the-count">
+                            <span id="dcript_content_fb" class="me-2 font_roboto_medium" style="color:red;">Chọn mức sao đánh giá</span>
+                            <span id="current">0</span>
+                            <span id="maximum">/ 200</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <input disabled type="file" name="UploadImageMultiple" hidden class="uploadimgcheck" accept=".jpg,.jpeg,.png" id="uploadimgrate" multiple onchange="preview()" />
+                            <label class="btn_uploadimgrating" for="uploadimgrate">Thêm ảnh</label>
+                            <span class="text-danger show_error_limit_img font_roboto_medium fs-14px"></span>
+                            <div class="preimg_rate d-flex" id="pre_img_rate"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mt-55px">
+                        <button id="ConfirmAdd" disabled class="btn btn-primary">Gửi đánh giá</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::rating product-->

@@ -1,0 +1,246 @@
+﻿@using Domain.Entities
+@using Electronic_Ecommerce.Common.Helpers
+@model List<Inventory>
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<int> quans = ViewBag.Quans as List<int>;//lấy số lượng sản phẩm dưới controller
+    double totalPrice = 0d;
+    double shippingFee = 30000d;//set cứng phí vận chuyển
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");//chuyển đổi tiền tệ sang kiểu dấu chấm 1000 => 1.000
+}
+
+@section scripts
+{
+    <!--script xử lý giỏ hàng-->
+    <script src="~/Assets/Client/js/cart_js/cart.js"></script>
+}
+
+<main class="main">
+    @*@if (Session["Cart"] == null)
+        {
+            <div class="container">
+                <div class="cart">
+                    <div class="header">
+                        <div class="back">
+                            <a href="/">
+                                <i class="icon-angle-left"></i>
+                                <strong>Quay lại</strong>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="cart-layout">
+                        <div class="cart-content">
+                            <div class="no-items">
+                                <div class="img">
+                                    <div class="center">
+                                        <img src="~/Assets/Client/images/backgrounds/no-item.gif" />
+                                    </div>
+                                    <p class="fs-20px"><strong>Hiện chưa có sản phẩm nào trong giỏ hàng <i class="icon-check-circle-o"></i></strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+
+        }*@
+    <div class="page-header text-center" style="background-image: url('/Assets/Client/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">Giỏ hàng<span>Xem thông tin về giỏ hàng của bạn</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        @*<div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+            </ol>
+        </div>*@
+    </nav>
+
+    <div class="page-content">
+        <div class="cart">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <table class="table table-cart table-mobile">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    var item = Model.ElementAt(i);
+                                    var quan = quans[i];
+                                    var price = item.Product.selling_price;
+                                    int maxquantity = Int32.Parse(item.quantity_on_hand.ToString());
+                                    if (item.Product.Discount != null)
+                                    {
+                                        if (item.Product.Discount.discount_start < DateTime.Now && item.Product.Discount.discount_end > DateTime.Now && item.Product.Discount.status.Trim() == "1")
+                                        {
+                                            price = item.Product.selling_price - item.Product.Discount.discount_price;
+                                        }
+                                    }
+                                    totalPrice += quan * price;
+                                    <tr>
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="/product/@item.Product.slug">
+                                                        <img src="@(item.Product.image)" alt="@item.Product.product_name">
+                                                    </a>
+                                                </figure>
+
+                                                <h3 class="product-title">
+                                                    <a href="/product/@item.Product.slug">@item.Product.product_name</a>
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+                                        <td class="price-col">@price.ToString("#,0₫", culture.NumberFormat)</td>
+                                        <td class="quantity-col">
+                                            <div class="cart-product-quantity">
+                                                @if (quan >= maxquantity)
+                                                {
+                                                    <input type="number" autocomplete="off" class="qty-input form-control" min="1" max="@item.quantity_on_hand" data-price="@price" data-id="@item.product_id" value="@item.quantity_on_hand" name="quantity" oninput="validity.valid || (value = '1');" title="Số lượng" />
+
+                                                }
+                                                else
+                                                {
+                                                    <input type="number" autocomplete="off" class="qty-input form-control" min="1" max="@item.quantity_on_hand" data-price="@price" data-id="@item.product_id" value="@quan" name="quantity" oninput="validity.valid || (value = '1');" title="Số lượng" />
+
+                                                }
+                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td class="total-col">@totalPrice.ToString("#,0₫", culture.NumberFormat)</td>
+                                        <td class="remove-col"><button class="btn-remove js-delete" data-id="@item.product_id"><i class="icon-close"></i></button></td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table><!-- End .table table-wishlist -->
+
+                        <div class="cart-bottom">
+                            <div class="cart-discount">
+                                <div class="input-group input-coupon">
+                                    <input type="hidden" id="total_price" value="@totalPrice" />
+                                    <input type="text" class="form-control" autocomplete="off" maxlength="20" placeholder="Mã giảm giá ở đây" />
+                                    <button class="btn btn-outline-primary-2 btn-submitcoupon"><i class="icon-long-arrow-right"></i></button>
+                                    <div class="coupon-apply-error"></div>
+                                </div><!-- End .input-group -->
+                            </div><!-- End .cart-discount -->
+
+                            <a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
+                        </div><!-- End .cart-bottom -->
+                    </div><!-- End .col-lg-9 -->
+                    <aside class="col-lg-3">
+                        <div class="summary summary-cart">
+                            <h3 class="summary-title">Tổng đơn hàng</h3><!-- End .summary-title -->
+
+                            <table class="table table-summary">
+                                <tbody>
+                                    <tr class="summary-subtotal">
+                                        <td>Tạm tính:</td>
+                                        <td id="totalPrice">@totalPrice.ToString("#,0₫", culture.NumberFormat)</td>
+                                    </tr><!-- End .summary-subtotal -->
+
+                                    <tr class="summary-subtotal">
+                                        <td>Giảm giá:</td>
+                                        <td id="discount">0₫</td>
+                                    </tr><!-- End .summary-discount -->
+
+                                    <tr class="summary-shipping">
+                                        <td>Vận chuyển:</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+
+                                    <tr class="summary-shipping-row">
+                                        <td>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="free-shipping" name="shipping" class="custom-control-input" checked="checked" />
+                                                <label class="custom-control-label" for="free-shipping">Giao tiết kiệm</label>
+                                            </div><!-- End .custom-control -->
+                                        </td>
+                                        <td>@shippingFee.ToString("#,###₫", culture.NumberFormat)</td>
+                                    </tr><!-- End .summary-shipping-row -->
+
+                                    <tr class="summary-shipping-row">
+                                        <td>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input" disabled="disabled" />
+                                                <label class="custom-control-label" for="standart-shipping">Giao hỏa tốc:</label>
+                                            </div>
+                                        </td>
+                                        <td>0đ</td>
+                                    </tr>
+
+                                    <tr class="summary-shipping-row">
+                                        <td>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input" disabled="disabled" />
+                                                <label class="custom-control-label" for="standart-shipping">Giao nhanh:</label>
+                                            </div>
+                                        </td>
+                                        <td>0đ</td>
+                                    </tr>
+
+                                    @*<tr class="summary-shipping-estimate">
+                                            <td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a></td>
+                                            <td>&nbsp;</td>
+                                        </tr>*@
+
+                                    <tr class="summary-total">
+                                        <td>Tổng tiền:</td>
+                                        @if (Session["Discount"] != null)//kiểm tra discount đã có chưa
+                                        {
+                                            if (Convert.ToDouble(Session["Discount"]) <= (totalPrice + shippingFee))
+                                            {
+                                                <td id="totalPriceWithFee">@((totalPrice + shippingFee - ViewBag.Discount).ToString("#,###₫", culture.NumberFormat))</td>
+                                            }
+                                            else
+                                            {
+                                                <td id="totalPriceWithFee">0₫</td>
+                                                //số tiền giảm lớn hơn tổng trị giá đơn hàng thì "thành tiền: 0₫"
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td id="totalPriceWithFee">
+                                                @((totalPrice + shippingFee).ToString("#,0₫", culture.NumberFormat))
+                                            </td>
+                                        }
+                                        <td></td>
+                                    </tr><!-- End .summary-total -->
+                                </tbody>
+                            </table><!-- End .table table-summary -->
+                            @if (User.Identity.IsAuthenticated && User.Identity.GetRole() != 1)
+                            {
+                                //Role quản trị sẽ không thanh toán được
+                                <a href="" class="disabled-href cursor-disable btn btn-outline-danger btn-order btn-block text-uppercase">Chỉ dành cho khách hàng</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Checkout","Cart")" class="js-checkout btn btn-outline-primary-2 btn-order btn-block text-uppercase">Tiến hành thanh toán</a>
+                            }
+
+                        </div><!-- End .summary -->
+
+                        <a href="/" class="btn btn-outline-dark-2 btn-block mb-3 text-uppercase"><span>Tiếp tục mua sắm</span><i class="icon-refresh"></i></a>
+                    </aside><!-- End .col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .cart -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->

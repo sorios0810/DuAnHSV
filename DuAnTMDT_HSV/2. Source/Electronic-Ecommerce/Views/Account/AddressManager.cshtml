@@ -1,0 +1,351 @@
+﻿@using Electronic_Ecommerce.Common.Helpers
+@model IEnumerable<Electronic_Ecommerce.DTOs.AddressManagerDTO>
+
+@{
+    ViewBag.Title = "Sổ địa chỉ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Assets/Client/js/address_manager.js"></script>
+}
+<style>
+    .border-bottom {
+        border-bottom: 1px dashed #dee2e6 !important;
+        padding-bottom: 15px;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <main class="main">
+        <div class="page-content mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-3 col-xl-3">
+                        @Html.Partial("_NavbarProfile")
+                    </div>
+                    <div class="col-12 col-lg-9 col-xl-9 mb-10px">
+                        <div class="user-page addresslist">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right text-uppercase">Quản lý địa chỉ</h4>
+                                <div class="text-uppercase">
+                                    @if (ViewBag.Check_address == 4)
+                                    {
+                                        <div><a href="#"><span class="create_address cursor-disable" data-toggle="tooltip" data-placement="top" title="Địa chỉ tối đa: 4 địa chỉ">Thêm mới</span></a></div>
+                                    }
+                                    else
+                                    {
+                                        <div><a style="cursor:pointer" id="popupcreateaddress"><span class="create_address">Thêm mới</span></a></div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="user-form row">
+                                @if (Model.Count() == 0)
+                                {
+                                    <div class="col-12">
+                                        <p class="h4 text-danger center">Không có địa chỉ</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        if (item.address_default == true)
+                                        {
+                                            <div class="col-12 col-md-6 col-lg-6 fs-14px mb-2">
+                                                <div class="addresslist-content address-active">
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-12 addresslist-detail">
+                                                            <div class="name-address">
+                                                                <span class="text-capitalize font-weight-bold">Họ tên: </span><span>@item.username</span>
+                                                                <span class="address_default_ticket ms-1">
+                                                                    <span class="material-icons fs-13px"> verified </span>
+                                                                    <span class="text-capitalize font-weight-bold">Mặc định</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="phone">
+                                                                <span class="text-capitalize font-weight-bold">Điện thoại: </span><span>@item.phonenumber</span>
+                                                            </div>
+                                                            <div class="limit_line_address">
+                                                                <span class="text-capitalize font-weight-bold">Địa chỉ: </span><span>@item.address_content, @item.ward_type @item.ward_name, @item.district_type @item.district_name, @item.province_name</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="addresslist-button center">
+                                                            <a style="cursor:pointer" onclick="EditAddress(@item.address_id, '@item.username', '@item.phonenumber',@item.province_id,@item.district_id,@item.ward_id, '@item.address_content')" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa địa chỉ"><span class="icon-edit me-2 addresslist-button-edit">Chỉnh sửa</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12 col-md-6 col-lg-6 fs-14px mb-2">
+                                                <div class="addresslist-content">
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-12 addresslist-detail">
+                                                            <div class="name-address">
+                                                                <span class="text-capitalize font-weight-bold">Họ tên: </span><span>@item.username</span>
+                                                                <span class="float-right font-weight-bold text-danger">
+                                                                    <a style="cursor:pointer" href="@Url.Action("DefaultAddress", "Account", new { id = item.address_id })" data-toggle="tooltip" data-placement="top" title="Đổi địa chỉ thành mặc dịnh"><span class="bi bi-arrow-left-right me-2 addresslist-button-edit"></span></a>
+                                                                </span>
+                                                            </div>
+                                                            <div class="phone">
+                                                                <span class="text-capitalize font-weight-bold">Điện thoại: </span><span>@item.phonenumber</span>
+                                                            </div>
+                                                            <div class="limit_line_address">
+                                                                <span class="text-capitalize font-weight-bold">Địa chỉ: </span><span>@item.address_content, @item.ward_type @item.ward_name, @item.district_type @item.district_name, @item.province_name</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="addresslist-button center">
+                                                            <a style="cursor:pointer" onclick="EditAddress(@item.address_id, '@item.username', '@item.phonenumber',@item.province_id,@item.district_id,@item.ward_id, '@item.address_content')" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa địa chỉ"><span class="icon-edit me-2 addresslist-button-edit">Chỉnh sửa</span></a>
+                                                            <span>|</span>
+                                                            <a style="cursor:pointer" onclick="deleteConfirm(@item.address_id)" data-toggle="tooltip" data-placement="top" title="Xoá địa chỉ"><span class="bi bi-trash addresslist-button-del">Xóa</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+}
+
+<!-- Create Address Begin -->
+<div class="modal fade" id="ModalCreate">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm địa chỉ mới</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="margin: 15px">
+                <div class="address-form">
+                    <form method="post" id="create_address">
+                        <div class="row border-bottom">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="labels">Họ tên <small class="text-danger">(*)</small></label>
+                                    @if (ViewBag.Check_address > 0)
+                                    {
+
+                                        <input type="text" maxlength="20" class="form-control" id="address_name" placeholder="Nhập họ tên" name="account_address_username">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" maxlength="20" class="form-control" id="address_name" value="@User.Identity.GetName()" placeholder="Nhập họ tên" name="account_address_username">
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="labels">Số điện thoại <small class="text-danger">(*)</small></label>
+                                    @if (ViewBag.Check_address > 0)
+                                    {
+                                        <input type="text" maxlength="10" class="form-control" id="address_phone" placeholder="Số điện thoại" name="account_address_phonenumber">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" maxlength="10" class="form-control" id="address_phone" placeholder="Số điện thoại" value="@User.Identity.GetPhoneNumber()" name="account_address_phonenumber">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1 border-bottom">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Tỉnh/Thành phố <small class="text-danger">(*)</small></label>
+                                    <select name="province_id" id="province" class="form-select cursor-disable select2-hidden-accessible">
+                                        <option value="">Tỉnh/Thành phố</option>
+                                        @foreach (var provice in ViewBag.ProvincesList)
+                                        {
+                                            <option value="@provice.province_id">@provice.province_name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Quận/Huyện <small class="text-danger">(*)</small></label>
+                                    <select disabled id="district" name="district_id" class="form-select cursor-disable select2-hidden-accessible">
+                                        <option value="">Quận/Huyện</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Phường/Xã <small class="text-danger">(*)</small></label>
+                                    <select disabled name="ward_id" id="ward" class="form-select cursor-disable select2-hidden-accessible">
+                                        <option value="">Phường/Xã</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="labels">Địa chỉ cụ thể <small class="text-danger">(*)</small></label>
+                                    <input type="text" maxlength="50" class="form-control" id="address_content" placeholder="Nhập địa chỉ cụ thể" name="account_address_content">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-1">
+                                <div class="check-box d-inline-block ml-0 ml-md-2">
+                                    <div class="form-group">
+                                        @if (ViewBag.Check_address > 0)
+                                        {
+                                            <input type="checkbox" name="account_address_default" value="true" id="checkeddefault" class="custom-control-input" />
+                                            <label for="checkeddefault" class="user-select-none" style="cursor:pointer;">Đặt làm địa chỉ mặc định</label>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="account_address_default" checked="checked" value="true" id="checkeddefault" class="custom-control-input" />
+                                            <label for="checkeddefault" class="user-select-none" style="cursor:pointer;">Đặt làm địa chỉ mặc định</label>
+                                        }
+                                        <input type="hidden" value="false" name="account_address_default" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2 text-center">
+                            <div class="form-group">
+                                <button type="reset" class="btn btn-outline-secondary font-weight-bold text-uppercase">
+                                    <span>Làm mới</span>
+                                </button>
+                                <button type="button" onclick="SaveAddress()" class="btn btn-outline-primary-2 font-weight-bold text-uppercase">
+                                    <span>Lưu</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Create Address End -->
+<!-- Edit Address Begin -->
+<div class="modal fade" id="EditAddress">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chỉnh sửa địa chỉ</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="margin: 15px">
+                <div class="address-form">
+                    <form method="post" id="create_address">
+                        <div class="row border-bottom">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="labels">Họ tên <small class="text-danger">(*)</small></label>
+                                    <input type="text" maxlength="20" class="form-control" id="address_name_edit" placeholder="Nhập họ tên" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="labels">Số điện thoại <small class="text-danger">(*)</small></label>
+                                    <input type="text" maxlength="10" class="form-control" id="address_phone_edit" placeholder="Nhập số điện thoại" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1 border-bottom">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Tỉnh/Thành phố <small class="text-danger">(*)</small></label>
+                                    <select name="province_id" id="province_edit" class="form-select select2-hidden-accessible">
+                                        <option value="">Tỉnh/Thành Phố</option>
+                                        @foreach (var provice in ViewBag.ProvincesList)
+                                        {
+                                            <option value="@provice.province_id">@provice.province_name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Quận/Huyện <small class="text-danger">(*)</small></label>
+                                    <select disabled id="district_edit" name="district_id" class="form-select select2-hidden-accessible cursor-disable">
+                                        @foreach (var district in ViewBag.DistrictsList)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                if (district.district_id == item.district_id)
+                                                {
+                                                    <option value="@district.district_id">@district.type @district.district_name</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="labels">Phường/Xã <small class="text-danger">(*)</small></label>
+                                    <select disabled name="ward_id" id="ward_edit" class="form-select select2-hidden-accessible cursor-disable">
+                                        @foreach (var ward in ViewBag.WardsList)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                if (ward.ward_id == item.ward_id)
+                                                {
+                                                    <option value="@ward.ward_id">@ward.type @ward.ward_name</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="labels">Địa chỉ cụ thể <small class="text-danger">(*)</small></label>
+                                    <input type="text" maxlength="50" class="form-control" id="address_content_edit" placeholder="Nhập địa chỉ cụ thể" name="account_address_content">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2 text-center">
+                            <div class="form-group">
+                                <button type="reset" class="btn btn-outline-secondary font-weight-bold text-uppercase">
+                                    <span>Làm mới</span>
+                                </button>
+                                <button type="button" id="confirmeditBtn" class="btn btn-outline-primary-2 font-weight-bold text-uppercase">
+                                    <span>Lưu</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Address End -->
+<!-- Delete Address Begin -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog modal-sm w-100" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="pt-3 pb-3">
+                    <h4 class="fs-20px text-danger">Chắc chắn xóa địa chỉ này ?</h4>
+                    Bấm <span class="font-weight-bold">'Xác nhận'</span> để hủy hoặc <span class="font-weight-bold">'Quay lại'</span> để bỏ qua
+                </div>
+                <div class="column-gap-md-3 d-flex center">
+                    <button type="button" id="cancel_delete_address" data-dismiss="modal" class="btn text-danger font-weight-bold"><span class="material-icons fs-30px">cancel</span>Hủy bỏ</button>
+                    <button type="button" id="btndelete_address" class="btn text-success font-weight-bold"><span class="icon-check-circle-o fs-30px"></span>Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete Address End -->

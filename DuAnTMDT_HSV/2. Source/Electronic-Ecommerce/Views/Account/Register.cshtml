@@ -1,0 +1,104 @@
+﻿@model Domain.Entities.Register
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+    ViewBag.Decription = "";
+    ViewBag.Tag = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <!--show password-->
+    <script src="~/Assets/Client/js/show_hide_password.js"></script>
+    <script src="~/Assets/Client/js/loader_email.js"></script>
+}
+
+<!-- Begin Register Content Area -->
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <main class="main">
+        <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('/Assets/Client/images/backgrounds/bg_3.jpg')">
+            <div class="container">
+                <div class="form-box">
+                    <div class="form-tab">
+                        <ul class="nav nav-pills nav-fill">
+                            <li class="nav-item">
+                                <a class="nav-link active">Đăng ký</a>
+                            </li>
+                        </ul>
+                        <div class="user-form mt-3">
+                            <form action="#">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label for="signup-name-2">Tên người dùng *</label>
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập họ tên" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="signup-phone-2">Số điện thoại *</label>
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập số điện thoại" } })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group">
+                                    <label for="singin-email-2">Email đăng ký *</label>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập Email" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    @*<input type="text" class="form-control" id="singin-email-2" name="singin-email" required>*@
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group">
+                                    <label for="singin-password-2">Mật khẩu *</label>
+                                    <div class="input-group justify-content-between border-0">
+                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", id = "Pass", placeholder = "Nhập mật khẩu" } })
+                                        <div class="input-group-append">
+                                            <span class="input-group-text toggle-password" toggle="#Pass" style="border:none">
+                                                <span class="material-icons cl_show_pass">visibility</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                </div><!-- End .form-group -->
+
+                                <div class="form-footer">
+                                    <button type="submit" id="btn_register" class="btn btn-outline-primary-2">
+                                        <span>Đăng ký ngay</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+                                        <label class="custom-control-label" for="register-policy-2">Tôi đồng ý <a href="#">điều khoản & điều kiện</a> *</label>
+                                    </div>
+                                </div><!-- End .form-footer -->
+                            </form>
+                            <div class="form-choice">
+                                <p class="text-center">hoặc đăng nhập bằng</p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <a href="#" class="btn btn-login btn-g">
+                                            <i class="icon-google"></i>
+                                            Đăng nhập google
+                                        </a>
+                                    </div><!-- End .col-6 -->
+                                    <div class="col-sm-6">
+                                        <a href="#" class="btn btn-login btn-f">
+                                            <i class="icon-facebook-f"></i>
+                                            Đăng nhập facebook
+                                        </a>
+                                    </div><!-- End .col-6 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .form-choice -->
+                            <div class="d-flex justify-content-center mt-3 fs-14px">
+                                <span class="text-bg-primary">
+                                    Nếu đã có tài khoản? <a href="@Url.Action("SignIn", "Account")">Đăng nhập ngay</a>
+                                </span>
+                            </div>
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .form-tab -->
+                </div><!-- End .form-box -->
+            </div><!-- End .container -->
+        </div><!-- End .login-page section-bg -->
+    </main>
+}
+<!-- Register Content Area End Here -->

@@ -1,0 +1,1016 @@
+﻿@model Electronic_Ecommerce.DTOs.ProductDTO
+@using Electronic_Ecommerce.Common
+@using Electronic_Ecommerce.Common.Helpers
+@{
+    ViewBag.Title = Model.product_name;
+    ViewBag.ImageURL = Model.Image;
+    ViewBag.Keyword = Model.product_name;
+    ViewBag.Decription = Model.seo_title;
+    ViewBag.Tag = Model.seo_title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ///=>hiển thị sản phẩm liên quan
+    var relatedproduct = (List<Domain.Entities.Product>)ViewBag.relatedproduct;
+    ///=>bài viết sản phẩm
+    var newsproducts = (List<Domain.Entities.NewProduct>)ViewBag.newsproducts;
+    ///=>đánh giá sản phẩm
+    var feedbackproduct = (List<Domain.Entities.Feedback>)ViewBag.feedbackproduct;
+    ///đánh giá trung bình
+    var AvgFeedback = (List<Domain.Entities.Feedback>)ViewBag.AvgFeedback;
+    ///đánh giá trung bình của sản phẩm liên quan
+    var AvgFeedback_related = (List<Domain.Entities.Feedback>)ViewBag.AvgFeedback_related;
+    ///=>check orderfeedback để tính trung bình sao
+    var OrderFeedback = (List<Domain.Entities.OrderDetail>)ViewBag.OrderFeedback;
+    ///=>ảnh feedback
+    var feedbackimages = (List<Domain.Entities.FeedbackImage>)ViewBag.feedbackimages;
+    ///tài khoản feedback
+    var Accountfeedback = (List<Domain.Entities.Account>)ViewBag.Accountfeedback;
+    ///=>hiển thị code giảm giá trong chi tiết sản phẩm
+    var CouponGlobal = (List<Domain.Entities.Discount>)ViewBag.CouponGlobal;
+    ///phản hồi của admin
+    var replyfeedback = (List<Domain.Entities.Feedback>)ViewBag.replyfeedback;
+    ///=>chuyển đổi tiền tệ. get dấu chấm cho giá sản phẩm
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+@section scripts{
+    <!--script xử lý phần đánh giá sản phẩm-->
+    <script src="~/Assets/Client/js/rating_product.js"></script>
+    <!--xử lý sự kiện thêm sản phẩm-->
+    <script src="~/Assets/Client/js/product/detail.js"></script>
+    <!--custom product images detail theo dạng slider sử dụng kèm carousel.min.js-->
+    <script src="~/Assets/Client/js/product_detail.js"></script>
+    <script src="https://unpkg.com/micromodal@0.4.6/dist/micromodal.min.js"></script>
+}
+
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container d-flex align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="icon-home"></a></li>
+                <li class="breadcrumb-item"><a href="/category/@Model.parent_genre_slug">@Model.parent_genre_name</a></li>
+                <li class="breadcrumb-item"><a href="/category/@Model.genre_slug">@Model.genre_name</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="">@Model.product_name</a></li>
+            </ol>
+
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content mt-3">
+        <div class="container">
+            <div class="product-details-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="product-gallery product-gallery-vertical">
+                            <div class="row">
+                                <figure class="product-main-image">
+                                    @if (Model.Image != null)
+                                    {
+                                        <img id="product-zoom" src="@Model.Image" data-zoom-image="@Model.Image" alt="">
+                                    }
+                                    <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                        <i class="icon-arrows"></i>
+                                    </a>
+                                </figure><!-- End .product-main-image -->
+
+                                <div id="product-zoom-gallery" class="product-image-gallery">
+                                    @if (Model.Image != null)
+                                    {
+                                        <a class="product-gallery-item active" href="#" data-image="@Model.Image" data-zoom-image="@Model.Image">
+                                            <img src="@Model.Image" alt="">
+                                        </a>
+                                    }
+
+                                    @if (Model.image_1 != null)
+                                    {
+                                        <a class="product-gallery-item" href="#" data-image="@Model.image_1" data-zoom-image="@Model.image_1">
+                                            <img src="@Model.image_1" alt="">
+                                        </a>
+                                    }
+
+                                    @if (Model.image_2 != null)
+                                    {
+                                        <a class="product-gallery-item" href="#" data-image="@Model.image_2" data-zoom-image="@Model.image_2">
+                                            <img src="@Model.image_2" alt="">
+                                        </a>
+                                    }
+
+                                    @if (Model.image_3 != null)
+                                    {
+                                        <a class="product-gallery-item" href="#" data-image="@Model.image_3" data-zoom-image="@Model.image_3">
+                                            <img src="@Model.image_3" alt="">
+                                        </a>
+                                    }
+
+                                    @if (Model.image_4 != null)
+                                    {
+                                        <a class="product-gallery-item" href="#" data-image="@Model.image_4" data-zoom-image="@Model.image_4">
+                                            <img src="@Model.image_4" alt="">
+                                        </a>
+                                    }
+
+                                    @if (Model.image_5 != null)
+                                    {
+                                        <a class="product-gallery-item" href="#" data-image="@Model.image_5" data-zoom-image="@Model.image_5">
+                                            <img src="@Model.image_5" alt="">
+                                        </a>
+                                    }
+                                </div><!-- End .product-image-gallery -->
+                            </div><!-- End .row -->
+                        </div><!-- End .product-gallery -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                        <div class="product-details">
+                            <h1 class="product-title text-danger">@Model.product_name (@Model.color)</h1><!-- End .product-title -->
+
+                            <div class="group-status fs-14px">
+                                <span class="product-details-ref first-status">SKU: <span class="status-name text-success">@Model.model</span></span>
+                                <span class="product-details-ref first-status">&nbsp;|&nbsp; Thương hiệu: <span class="status-name text-uppercase"><a href="/brand/@Model.brand_slug" class="text-success">@Model.brand_name</a></span></span>
+                                @*<span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name"></span></span>*@
+                                @if (Model.quantity.ToString().Trim() == "4" || Model.quantity.ToString().Trim() == "5" || Model.quantity.ToString().Trim() == "6" || Model.quantity.ToString().Trim() == "7" || Model.quantity.ToString().Trim() == "8" || Model.quantity.ToString().Trim() == "9" || Model.quantity.ToString().Trim() == "10")
+                                {
+                                    <span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name text-warning">Còn ít</span></span>
+                                }
+                                else if (Model.quantity.ToString().Trim() == "3")
+                                {
+                                    <span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name text-primary">3 sản phẩm</span></span>
+                                }
+                                else if (Model.quantity.ToString().Trim() == "2")
+                                {
+                                    <span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name text-primary">2 sản phẩm</span></span>
+                                }
+                                else if (Model.quantity.ToString().Trim() == "1")
+                                {
+                                    <span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name text-primary">1 sản phẩm</span></span>
+                                }
+                                else if (Model.quantity.ToString().Trim() == "0") //nếu quantity = 0 thì hiển thị hết hàng
+                                {
+                                    <span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name text-danger">Hết hàng</span></span>
+                                }
+                                else //ngược lại các điều kiện trên thì hiển thị còn hàng
+                                {
+                                    <span class="product-details-ref first-status">&nbsp;|&nbsp; Tình trạng: <span class="status-name text-success">Còn hàng</span></span>
+                                }
+                            </div>
+
+                            <div class="ratings-container mt-1">
+                                @{
+                                    double onestar = 1; int c_onestar = 0; double truestar = 2; int c_truestar = 0;
+                                    double threestar = 3; int c_threestar = 0; ; double fourstar = 4; int c_fourstar = 0;
+                                    double fivestar = 5; int c_fivestar = 0; int totalrating = 0; double avg1 = 0;
+                                    foreach (var item in AvgFeedback)
+                                    {
+                                        foreach (var orderitem in OrderFeedback)
+                                        {
+                                            if (orderitem.product_id == item.product_id && item.product_id == Model.product_id && item.status == "2" && item.parent_feedback_id == 0)
+                                            {
+                                                totalrating++;
+                                                if (item.rate_star == 1)
+                                                {
+                                                    c_onestar++;
+                                                }
+                                                if (item.rate_star == 2)
+                                                {
+                                                    c_truestar++;
+                                                }
+                                                if (item.rate_star == 3)
+                                                {
+                                                    c_threestar++;
+                                                }
+                                                if (item.rate_star == 4)
+                                                {
+                                                    c_fourstar++;
+                                                }
+                                                if (item.rate_star == 5)
+                                                {
+                                                    c_fivestar++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    avg1 = (onestar * c_onestar / totalrating) + (truestar * c_truestar / totalrating) + (threestar * c_threestar / totalrating) + (fourstar * c_fourstar / totalrating) + (fivestar * c_fivestar / totalrating);
+                                    if (avg1 >= 1 && avg1 < 2)
+                                    {
+                                        <span class="rating me-2">
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            @for (int i = 1; i < 5; i++)
+                                            {
+                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                            }
+                                        </span>
+                                    }
+                                    else if ((avg1 >= 2) && (avg1 < 3))
+                                    {
+                                        <span class="rating me-2">
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            @for (int i = 1; i < 4; i++)
+                                            {
+                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                            }
+                                        </span>
+                                    }
+                                    else if ((avg1 >= 3) && (avg1 < 4))
+                                    {
+                                        <span class="rating me-2">
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            @for (int i = 1; i < 3; i++)
+                                            {
+                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                            }
+                                        </span>
+                                    }
+                                    else if ((avg1 >= 4) && (avg1 < 5))
+                                    {
+                                        <span class="rating me-2">
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                            @for (int i = 1; i < 2; i++)
+                                            {
+                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                            }
+                                        </span>
+                                    }
+                                    else if (avg1 == 5)
+                                    {
+                                        <span class="rating me-2">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <i class="icon-star" aria-hidden="true"></i>
+                                            }
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="rating me-2">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <i class="icon-star-o" aria-hidden="true"></i>
+                                            }
+                                        </span>
+                                    }
+                                }
+                                <a class="ratings-text" href="#product-review-link" id="review-link">( @ViewBag.CountFeedback Đánh giá )</a>
+                            </div><!-- End .rating-container -->
+
+                            <div class="product-price">
+                                @if (Model.discount_start < DateTime.Now && Model.discount_end > DateTime.Now && Model.discount_status.Trim() == "1")
+                                {
+                                    <span class="old-price">@Model.price.ToString("#,###₫", culture.NumberFormat)</span>
+                                    <span class="new-price">@((Model.price - Model.discount_price).ToString("#,###₫", culture.NumberFormat))</span>
+                                    <span class="text-success new-price">-@((((Model.price)/(Model.price)) - ((Model.price - Model.discount_price)/(Model.price))).ToString("0.00%"))</span>
+                                }
+                                else
+                                {
+                                    <span class="new-price">@Model.price.ToString("#,###₫", culture.NumberFormat)</span>
+                                }
+                            </div><!-- End .product-price -->
+
+                            <div class="product-content">
+                                <div class="pro-special-offer-container">
+                                    <div class="spec-title d-flex align-items-center justify-content-between">
+                                        <div class="spec-price font-weight-bold text-uppercase fs-14px">
+                                            Khuyến mãi
+                                        </div>
+                                    </div>
+                                    <ul class="ul">
+                                        @if (ViewBag.CheckExistBannerDetail != null || CouponGlobal.Count > 0)
+                                        {
+                                            foreach (var banner_detail in ViewBag.BannerDetail)
+                                            {
+                                                foreach (var banner in ViewBag.Banner)
+                                                {
+                                                    if (banner.banner_id == banner_detail.banner_id)
+                                                    {
+                                                        <li>
+                                                            <span class="text">
+                                                                @if (banner.description == null || banner.description == "")
+                                                                {
+                                                                    <span>@banner.banner_name - <a class="text-danger" href="/promo/@banner.slug">Xem chi tiết</a></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span> @banner.description - <a class="text-danger" href="/promo/@banner.slug">Xem chi tiết</a></span>
+                                                                }
+                                                            </span>
+                                                        </li>
+
+                                                    }
+                                                }
+                                            }
+                                            foreach (var coupon in CouponGlobal)
+                                            {
+                                                if (coupon.discount_type == 3)
+                                                {
+                                                    <li class="d-flex fs-14px">
+                                                        <span class="material-icons fs-6px me-1 position-relative mt-1"> circle </span><span class="text">Nhập mã <span class="font_roboto_medium">@coupon.discount_code</span> giảm @coupon.discount_price% tối đa <span class="text-website font_roboto_medium">@coupon.discount_max.ToString("#,###₫", culture.NumberFormat)</span> - @coupon.discount_name, áp dụng đến @coupon.discount_end.ToString("dd/MM/yyyy") </span>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="d-flex fs-14px">
+                                                        <span class="material-icons fs-6px me-1 position-relative mt-1"> circle </span><span class="text">Nhập mã <span class="font_roboto_medium">@coupon.discount_code</span> giảm ngay <span class="text-website font_roboto_medium">@coupon.discount_price.ToString("#,###₫", culture.NumberFormat)</span> - @coupon.discount_name, áp dụng đến @coupon.discount_end.ToString("dd/MM/yyyy") </span>
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <span class="text">Không có khuyến mãi</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div><!-- End .product-content -->
+                            <form method="post" action="#" class="cart-quantity">
+                                @if (Model.quantity.ToString().Trim() != "0")
+                                {
+                                    if (User.Identity.IsAuthenticated && User.Identity.GetRole() != 1) //Const.ROLE_ADMIN_NAME chỉ là đặt tên cho role thôi,trong databasse "0" là admin "1" là user(nguòi dùng)
+                                    {
+                                        <!-- Phần này chỉ dành cho khách -->
+                                        @*<div class="details-filter-row details-row-size">
+                                                <label for="qty">Số lượng:</label>
+                                                <div class="product-details-quantity">
+                                                    <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                                </div>
+                                            </div>
+                                            <div class="product-details-action">
+                                                <a href="#" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+                                            </div>*@
+                                        <div class="quantity show">
+                                            <div class="details-filter-row details-row-size">
+                                                <label for="qty">Số lượng</label>
+                                                <div class="product-details-quantity cursor-disable">
+                                                    <input step="0" min="0" max="@Model.quantity" name="quantity" value="0" title="Số lượng" class="input-text form-control" type="number" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="product-details-action">
+                                                <a href="#" class="btn btn-product btn-cart cursor-disable"><span>Dành cho khách</span></a>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <!-- Phần này khách hàng được phép mua -->
+                                        <div class="quantity show">
+                                            <div class="details-filter-row details-row-size">
+                                                <label for="qty">Số lượng</label>
+                                                <div class="product-details-quantity">
+                                                    <input step="1" min="1" max="@Model.quantity.ToString().Trim()" name="quantity" value="1" oninput="validity.valid || (value = '');" title="Số lượng" class="qty-text form-control" size="4" type="number" />
+                                                </div>
+                                            </div>
+                                            <div class="product-details-action">
+                                                <button id="btnAddToCart" data-id="@Model.product_id" class="btn btn-product btn-cart" type="submit" style="width: 100%">
+                                                    <span class="text_1 text-uppercase">Thêm vào giỏ</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    //đã ràng buộc không cho nhập số âm
+                                    <div class="quantity show">
+                                        <div class="details-filter-row details-row-size">
+                                            <label for="qty">Số lượng</label>
+                                            <div class="product-details-quantity">
+                                                <input min="0" max="0" name="quantity" value="0" title="số lượng" class="input-text form-control" size="4" type="number" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="product-details-action">
+                                            <button class="btn btn_base btn_add_cart btn-cart" target="_blank" onclick="location.href='tel:+84931457758';">
+                                                <span class="text_1 text-uppercase">Liên hệ</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </form>
+
+                            <div class="product-details-footer">
+                                <div class="social-icons social-icons-sm">
+                                    <span class="social-label fs-14px">Chia sẻ qua:</span>
+                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                </div>
+                            </div><!-- End .product-details-footer -->
+                        </div><!-- End .product-details -->
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .product-details-top -->
+
+            <div class="product-details-tab">
+                <ul class="nav nav-pills justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Mô tả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Thông số kỹ thuật</a>
+                    </li>
+                    @*<li class="nav-item">
+                        <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Chính </a>
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Đánh giá ( @ViewBag.CountFeedback )</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                        <div class="product-desc-content">
+                            <h3 class="font-weight-bold">Thông tin sản phẩm</h3>
+                            @if (Model.description == "" || Model.description == null)
+                            {
+                                <p>Đang cập nhật.....</p>
+                            }
+                            else
+                            {
+                                <p>@Html.Raw(Model.description)</p>
+                            }
+                        </div><!-- End .product-desc-content -->
+                    </div><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                        <div class="product-desc-content">
+                            <h3 class="font-weight-bold">Thông tin</h3>
+                            @if (Model.specification == "" || Model.specification == null)
+                            {
+                                <p>Đang cập nhật thông tin.....</p>
+                            }
+                            else
+                            {
+                                <p>@Html.Raw(Model.specification)</p>
+                            }
+                        </div>
+                    </div>
+                    <!--<div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
+                    <div class="product-desc-content">
+                        <h3>Delivery & returns</h3>
+                        <p>
+                            We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br>
+                            We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a>
+                        </p>
+                    </div>-->
+                    <!-- End .product-desc-content -->
+                    <!--</div>--><!-- .End .tab-pane -->
+                    <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                        <div class="reviews">
+                            <h3>Đánh giá (@ViewBag.CountFeedback)</h3>
+                            @if (Model.count_feedback == 0)
+                            {
+                                <p>Chưa có đánh giá nào</p>
+                            }
+                            else
+                            {
+                                foreach (var fb in feedbackproduct)
+                                {
+                                    if (fb.product_id == Model.product_id)
+                                    {
+                                        foreach (var ac in Accountfeedback)
+                                        {
+                                            if (ac.account_id == fb.account_id && fb.status == "2")
+                                            {
+                                                <div class="review">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-auto">
+                                                            <h4>
+                                                                <a href="#">@ac.Name</a>
+                                                                @{
+                                                                    string fbconfirm = "";
+                                                                    string verify = "";
+                                                                    foreach (var odt in OrderFeedback)
+                                                                    {
+                                                                        if (odt.Order.account_id == fb.account_id && odt.product_id == fb.product_id && odt.Order.status == "3")
+                                                                        {
+                                                                            fbconfirm = "Đã mua tại Shop";
+                                                                            verify = "verified";
+                                                                        }
+                                                                    }
+                                                                    <span class="fs-14px text-success"><span class="material-icons fs-14px">@verify</span><span>@fbconfirm</span></span>
+                                                                }
+                                                            </h4>
+                                                            <div class="ratings-container">
+                                                                <div class="rating">
+                                                                    @if (fb.rate_star == 0)
+                                                                    {
+                                                                        for (int i = 1; i <= 5; i++)
+                                                                        {
+                                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                                        }
+                                                                    }
+                                                                    else if (fb.rate_star == 1)
+                                                                    {
+                                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                                        for (int i = 1; i <= 4; i++)
+                                                                        {
+                                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                                        }
+                                                                    }
+                                                                    else if (fb.rate_star == 2)
+                                                                    {
+                                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                                        for (int i = 1; i <= 3; i++)
+                                                                        {
+                                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                                        }
+                                                                    }
+                                                                    else if (fb.rate_star == 3)
+                                                                    {
+                                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                                        <i class="icon-star-o" aria-hidden="true"></i>
+                                                                        <i class="icon-star-o" aria-hidden="true"></i>
+                                                                    }
+                                                                    else if (fb.rate_star == 4)
+                                                                    {
+                                                                        for (int i = 1; i <= 4; i++)
+                                                                        {
+                                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                                        }
+                                                                        <i class="icon-star-o" aria-hidden="true"></i>
+                                                                    }
+                                                                    else if (fb.rate_star == 5)
+                                                                    {
+                                                                        for (int i = 1; i <= 5; i++)
+                                                                        {
+                                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                                        }
+                                                                    }
+                                                                </div><!-- End .ratings -->
+                                                            </div><!-- End .rating-container -->
+                                                            <span class="review-date">@fb.create_at.ToString("dd-MM-yyyy HH:mm")</span>
+                                                        </div><!-- End .col -->
+                                                        <div class="col">
+                                                            <h4>Good, perfect size</h4>
+
+                                                            <div class="review-content">
+                                                                <p>@fb.description</p>
+                                                            </div><!-- End .review-content -->
+
+                                                            <div class="review-action">
+                                                                <a href="#"><i class="icon-thumbs-up"></i>Thích (2)</a>
+                                                                <a href="#"><i class="icon-thumbs-down"></i>Không thích (0)</a>
+                                                            </div><!-- End .review-action -->
+                                                        </div><!-- End .col-auto -->
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .review -->
+                                                foreach (var reply in replyfeedback)
+                                                {
+                                                    if (reply.parent_feedback_id == fb.feedback_id)
+                                                    {
+                                                        <div class="bg-reply-fb">
+                                                            <div>
+                                                                <span class="font_roboto_medium">@reply.Account.Name</span>
+                                                                @if (reply.Account.role_id != 1)
+                                                                {
+                                                                    <span class="fs-12px fb-role-color ms-1">@reply.Account.Role.role_name</span>
+                                                                }
+                                                            </div>
+                                                            <p class="msg" style="margin-top:unset!important">
+                                                                @reply.description
+                                                            </p>
+                                                            <div class="fs-12px text-muted">@reply.create_at.ToString("dd-MM-yyyy HH:mm")</div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="col-lg-5 mt-bg--add-rating">
+                            @{
+                                double onestar1 = 1; int c_ontstar1 = 0; double truestar1 = 2; int c_truestar1 = 0;
+                                double threestar1 = 3; int c_threestar1 = 0; ; double fourstar1 = 4; int c_fourstar1 = 0;
+                                double fivestar1 = 5; int c_fivestar1 = 0; int totalrating1 = 0; double avg2 = 0;
+                                foreach (var item in AvgFeedback)
+                                {
+                                    foreach (var orderitem in OrderFeedback)
+                                    {
+                                        if (orderitem.product_id == item.product_id && item.product_id == Model.product_id && item.status == "2" && item.parent_feedback_id == 0)
+                                        {
+                                            totalrating1++;
+                                            if (item.rate_star == 1)
+                                            {
+                                                c_ontstar1++;
+                                            }
+                                            if (item.rate_star == 2)
+                                            {
+                                                c_truestar1++;
+                                            }
+                                            if (item.rate_star == 3)
+                                            {
+                                                c_threestar1++;
+                                            }
+                                            if (item.rate_star == 4)
+                                            {
+                                                c_fourstar1++;
+                                            }
+                                            if (item.rate_star == 5)
+                                            {
+                                                c_fivestar1++;
+                                            }
+                                        }
+                                    }
+                                }
+                                avg2 = (onestar1 * c_ontstar1 / totalrating1) + (truestar1 * c_truestar1 / totalrating1) + (threestar1 * c_threestar1 / totalrating1) + (fourstar1 * c_fourstar1 / totalrating1) + (fivestar1 * c_fivestar1 / totalrating1);
+                                <div class="d-flex justify-content-center avg_feedback">
+                                    @if (ViewBag.CountFeedback == 0)
+                                    {
+                                        <span>0.0</span>
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            @string.Format("{0:0.0}", (avg2))
+                                        </span>
+                                    }
+                                </div>
+                                if (avg2 >= 1 && avg2 < 2)
+                                {
+                                    <div class="rating d-flex justify-content-center">
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        @for (int i = 1; i < 5; i++)
+                                        {
+                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                }
+                                else if (avg2 >= 2 && avg2 < 3)
+                                {
+                                    <div class="rating d-flex justify-content-center">
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        @for (int i = 1; i < 4; i++)
+                                        {
+                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                }
+                                else if (avg2 >= 3 && avg2 < 4)
+                                {
+                                    <div class="rating d-flex justify-content-center">
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        @for (int i = 1; i < 3; i++)
+                                        {
+                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                }
+                                else if (avg2 >= 4 && avg2 < 5)
+                                {
+                                    <div class="rating d-flex justify-content-center">
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        <i class="icon-star" aria-hidden="true"></i>
+                                        @for (int i = 1; i < 2; i++)
+                                        {
+                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                }
+                                else if (avg2 == 5)
+                                {
+                                    <div class="rating d-flex justify-content-center">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="icon-star" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="rating d-flex justify-content-center">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                        }
+                                    </div>
+                                }
+                                <div class="d-flex justify-content-center fs-14px text-muted">(@ViewBag.CountFeedback lượt đánh giá)</div>
+                            }
+                            <div class="full review_bt_section d-flex justify-content-center">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.Identity.GetRole() == 1)
+                                    {
+                                        if (ViewBag.CheckEditOrder > 0)
+                                        {
+                                            if (ViewBag.CheckExistFb == 0)
+                                            {
+                                                <button class="btn bg-button" id="button_add_rating" style="color: #fff">Thêm đánh giá</button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn bg-danger" disabled>Đã đánh giá</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <div class="center">
+                                                    <button class="btn bg-button cursor-disable text-uppercase" style="color: #fff" disabled>Thêm đánh giá</button>
+                                                </div>
+                                                <div class="text-danger center mt-1 fs-14px">( Hoàn tất đơn hàng chứa sản phẩm này để đánh giá )</div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <button class="btn bg-danger text-uppercase" style="color: #fff" disabled>Dành cho khách</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <button class="btn bg-button rating_login text-uppercase" style="color: #fff">Thêm đánh giá</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End .tab-content -->
+            </div><!-- End .product-details-tab -->
+            @if (relatedproduct.Count > 0)
+            {
+                <h2 class="title text-center mb-4">Sản phẩm cùng dòng @Model.genre_name</h2><!-- End .title text-center -->
+
+                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                     data-owl-options='{
+                            "nav": false,
+                            "dots": true,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'>
+                    @foreach (var item in relatedproduct)
+                    {
+                        <div class="product product-7 text-center">
+                            <figure class="product-media">
+                                @*<span class="product-label label-new">New</span>*@
+                                <a href="/product/@item.slug">
+                                    <img class="product-image" src="@item.image" alt="@item.product_name">
+                                </a>
+
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>Yêu thích</span></a>
+                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Xem nhanh"><span>Xem nhanh</span></a>
+                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                </div><!-- End .product-action-vertical -->
+
+                                <div class="product-action">
+                                    <a href="#" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a href="#">SKU: @item.model</a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title"><a href="/product/@item.slug">@item.product_name</a></h3><!-- End .product-title -->
+                                <div class="product-price">
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old-price">@item.selling_price.ToString("#,###₫", culture.NumberFormat)</span>
+                                            <span class="new-price">@((item.selling_price - item.Discount.discount_price).ToString("#,###₫", culture.NumberFormat))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new-price">@item.selling_price.ToString("#,###₫", culture.NumberFormat)</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new-price">@item.selling_price.ToString("#,###₫", culture.NumberFormat)</span>
+                                    }
+                                </div><!-- End .product-price -->
+                                <div class="ratings-container">
+                                    <div class="rating">
+                                        @{
+                                            double onestar_1 = 1; int c_onetstar_1 = 0; double truestar_1 = 2; int c_truestar_1 = 0;
+                                            double threestar_1 = 3; int c_threestar_1 = 0; ; double fourstar_1 = 4; int c_fourstar_1 = 0;
+                                            double fivestar_1 = 5; int c_fivestar_1 = 0; int totalrating_1 = 0; double avg3 = 0;
+                                            foreach (var avg in AvgFeedback_related)
+                                            {
+                                                if (avg.product_id == item.product_id && avg.status == "2" && avg.parent_feedback_id == 0)
+                                                {
+                                                    totalrating_1++;
+                                                    if (avg.rate_star == 1)
+                                                    {
+                                                        c_onetstar_1++;
+                                                    }
+                                                    if (avg.rate_star == 2)
+                                                    {
+                                                        c_truestar_1++;
+                                                    }
+                                                    if (avg.rate_star == 3)
+                                                    {
+                                                        c_threestar_1++;
+                                                    }
+                                                    if (avg.rate_star == 4)
+                                                    {
+                                                        c_fourstar_1++;
+                                                    }
+                                                    if (avg.rate_star == 5)
+                                                    {
+                                                        c_fivestar_1++;
+                                                    }
+                                                }
+                                            }
+                                            avg3 = (onestar_1 * c_onetstar_1 / totalrating_1) + (truestar_1 * c_truestar_1 / totalrating_1) +
+                                            (threestar_1 * c_threestar_1 / totalrating_1) + (fourstar_1 * c_fourstar_1 / totalrating_1) +
+                                            (fivestar_1 * c_fivestar_1 / totalrating_1);
+                                            if (avg3 >= 1 && avg3 < 2)
+                                            {
+                                                <div class="rating">
+                                                    <div class="center">
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        @for (int i = 1; i < 5; i++)
+                                                        {
+                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (avg3 >= 2 && avg3 < 3)
+                                            {
+                                                <div class="rating">
+                                                    <div class="center">
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        @for (int i = 1; i < 4; i++)
+                                                        {
+                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (avg3 >= 3 && avg3 < 4)
+                                            {
+                                                <div class="rating">
+                                                    <div class="center">
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        @for (int i = 1; i < 3; i++)
+                                                        {
+                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (avg3 >= 4 && avg3 < 5)
+                                            {
+                                                <div class="rating">
+                                                    <div class="center">
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        <i class="icon-star" aria-hidden="true"></i>
+                                                        @for (int i = 1; i < 2; i++)
+                                                        {
+                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (avg3 == 5)
+                                            {
+                                                <div class="rating">
+                                                    <div class="center">
+                                                        @for (int i = 1; i <= 5; i++)
+                                                        {
+                                                            <i class="icon-star" aria-hidden="true"></i>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="rating">
+                                                    <div class="center">
+                                                        @for (int i = 1; i <= 5; i++)
+                                                        {
+                                                            <i class="icon-star-o" aria-hidden="true"></i>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    </div><!-- End .ratings -->
+                                    <span class="ratings-text">( @ViewBag.CountFeedback Đánh giá )</span>
+                                </div><!-- End .rating-container -->
+                            </div><!-- End .product-body -->
+                        </div>
+                    }
+                </div>
+            }
+            @if (newsproducts.Count > 0)
+            {
+                <div class="boderproductdetail">
+                    <h2 class="title text-center mb-4">Bài viết liên quan</h2>
+                    <div class="p-3">
+                        <div class="row">
+                            @foreach (var item in newsproducts)
+                            {
+                                <div class="col-md-3 col-lg-3 col-sm-6 col-6 product_related_post">
+                                    <div><a href="/New/list_post/@item.New.ChildCategory.slug" class="me-2 category_sidebar_url">@item.New.ChildCategory.name</a><a href="/post/@item.New.slug"><img class="img_related_post" src="@item.New.image2" alt="@item.New.slug"></a></div>
+                                    <a href="/post/@item.New.slug" class="post-url-side-bar">
+                                        @item.New.news_title
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" id="modelclose" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="rating-container">
+                    <ul class="nav nav-pills nav-fill nav-border-anim">
+                        <li class="nav-item">
+                            <a class="nav-link active fs-20px">Đánh giá sản phẩm</a>
+                        </li>
+                    </ul>
+                    <form id="RatingFromData" method="post" enctype="multipart/form-data" onsubmit="AjaxPost(this)">
+                        <div class="form-group">
+                            <div onmouseout="CRateSelected()" class="star_ratingfb">
+                                <div class="rating">
+                                    <label class="labels">Vui lòng chọn sao đánh giá:</label>
+                                    <i id="rate1" onmouseout="CRateOut(1)" onmouseover="CRateOver(1)" onclick="CRateClick(1)" class="icon-star-o" aria-hidden="true" title="Quá tệ"></i>
+                                    <i id="rate2" onmouseout="CRateOut(2)" onmouseover="CRateOver(2)" onclick="CRateClick(2)" class="icon-star-o" aria-hidden="true" title="Tệ"></i>
+                                    <i id="rate3" onmouseout="CRateOut(3)" onmouseover="CRateOver(3)" onclick="CRateClick(3)" class="icon-star-o" aria-hidden="true" title="Bình thường"></i>
+                                    <i id="rate4" onmouseout="CRateOut(4)" onmouseover="CRateOver(4)" onclick="CRateClick(4)" class="icon-star-o" aria-hidden="true" title="Tuyệt vời"></i>
+                                    <i id="rate5" onmouseout="CRateOut(5)" onmouseover="CRateOver(5)" onclick="CRateClick(5)" class="icon-star-o" aria-hidden="true" title="Quá tuyệt vời"></i>
+                                </div>
+                            </div>
+                        </div>                      
+                        <input hidden name="product_id" class="form-control" value="@Model.product_id" id="ProD_ID">
+                        <input hidden name="genre_id" class="form-control" value="@Model.genre_id" id="Genre_ID">
+                        <input hidden name="rate_star" class="form-control" id="lblRating">
+                        <div class="col-md-12">
+                            <label for="message-text" class="labels">Nội dung đánh giá:</label>
+                            <div class="form-group">
+                                <textarea disabled maxlength="200" rows="3" placeholder="Viết đánh giá của bạn tại đây" class="form-control cursor-disable write_content_fb" name="description" id="FBk_Content"></textarea>
+                                <div id="the-count">
+                                    <span id="dcript_content_fb" class="me-2 font_roboto_medium" style="color:red;">Chọn mức sao đánh giá</span>
+                                    <span id="current">0</span>
+                                    <span id="maximum">/ 200</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input disabled type="file" name="UploadImageMultiple" hidden class="uploadimgcheck" accept=".jpg,.jpeg,.png" id="uploadimgrate" multiple onchange="preview()" />
+                                <label class="btn_uploadimgrating" for="uploadimgrate">Thêm ảnh</label>
+                                <span class="text-danger show_error_limit_img font_roboto_medium fs-14px"></span>
+                                <div class="preimg_rate d-flex" id="pre_img_rate"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group center">
+                            <button id="ConfirmAdd" disabled class="btn btn-outline-primary-2">
+                                <span>Gửi đánh giá</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

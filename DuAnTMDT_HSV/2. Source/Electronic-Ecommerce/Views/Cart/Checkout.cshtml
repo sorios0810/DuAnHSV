@@ -1,0 +1,497 @@
+﻿@using Electronic_Ecommerce.Common.Helpers
+@model Electronic_Ecommerce.DTOs.CheckoutOrderDTO
+@{
+    ViewBag.Title = "Thanh toán đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var discountPrice = Convert.ToDouble(ViewBag.Discount);//giảm giá
+    var total = Convert.ToDouble(ViewBag.Total);//Giá sau khi áp dụng mã giảm giá, được tính ở controller
+    var price = total;//giá gốc trước khi dùng mã giảm giá
+    var shippingFee = 30000d;// Phí vận chuyển 30k
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    if (discountPrice >= price)//nếu giảm giá lớn trị giá đơn hàng thì total = 30k(30k là phí ship thôi, giảm giá chỉ giảm giá sản phẩm chứ không giảm giá ship)
+    {
+        total = 30000;
+    }
+    else
+    {
+        total = price - discountPrice + 30000;
+    }
+
+    TempData["Total"] = total;//tổng tiền phải thanh toán, truyền xống controller
+}
+
+@section scripts{
+    <script src="~/Assets/Client/js/loader_email.js"></script>
+    <script src="~/Assets/Client/js/cart_js/checkout_order.js"></script>
+}
+
+<style>
+    .border-bottom {
+        border-bottom: 1px dashed #dee2e6 !important;
+        padding-bottom: 25px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        box-sizing: border-box;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+    }
+
+    .labels {
+        color: #666;
+        font-weight: 400; 
+        margin: 0 0 1.1rem;
+        font-size: 1.5rem;
+    }
+</style>
+
+<div hidden id="loader-wrapper">
+    <div hidden id="loader"></div>
+    <div hidden class="loader-section section-left"></div>
+    <div hidden class="loader-section section-right"></div>
+</div>
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('/Assets/Client/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">Thanh toán<span>Điền thông tin để tiến hành thanh toán</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        @*<div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+                </ol>
+            </div>*@
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="checkout">
+            <div class="container">
+                <div class="checkout-discount">
+                    <form method="post">
+                        <input type="text" class="form-control" required id="checkout-discount-input">
+                        <label for="checkout-discount-input" class="text-truncate">Bạn có mã giảm giá? <span>Nhấn vào đây để nhập mã</span></label>
+                    </form>
+                </div><!-- End .checkout-discount -->
+                <form method="post" id="checkoutform" action="@Url.Action("SaveOrder","Cart")">
+                    <!--thực hiện hành động lưu sản phẩm và thông tin khách hàng vào table Order, Order_Detail-->
+                    <!--begin::Payment and Delivery-->
+                    <div class="Module Module-359">
+                        <div class="ModuleContent">
+                            <!--begin::Section-->
+                            <section class="cart-step">
+                                <div class="cart-title">
+                                    <i class="material-icons">payment</i>
+                                    <span>Phương thức thanh toán</span>
+                                </div>
+                                <!--chạy ngầm. khi chuyển các phương thức thanh toán thì cái này sẽ chuyển theo vd: chuyển từ tt nhận hàng sang vnpay thì lúc này radiobutton sẽ check  payment_id = 2-->
+                                @Html.RadioButtonFor(model => model.payment_id, "1", new { id = "payment-1-checked", Checked = "checked", hidden = "hiddenn" })
+                                @Html.RadioButtonFor(model => model.payment_id, "2", new { id = "payment-2-checked", hidden = "hiddenn" })
+                                @Html.RadioButtonFor(model => model.payment_id, "5", new { id = "payment-3-checked", hidden = "hiddenn" })
+                                @Html.RadioButtonFor(model => model.payment_id, "6", new { id = "payment-5-checked", hidden = "hiddenn" })
+                                <div class="cart-payment">
+                                    <div class="payment-method">
+                                        <!-- start list phương thức thanh toán -->
+                                        <ul class="r-tabs-nav">
+                                            <li class="method-select payment-1 r-tabs-state-active">
+                                                <a class="r-tabs-anchor">
+                                                    <label class="method-item" for="payment-1-checked">
+                                                        <div class="icon">
+                                                            <img src="~/Images/it_service/cod.png" />
+                                                        </div>
+                                                        <div class="name">Thanh toán khi nhận hàng</div>
+                                                    </label>
+                                                </a>
+                                            </li>
+                                            <li class="method-select payment-2">
+                                                <a class="r-tabs-anchor ">
+                                                    <label class="method-item" for="payment-2-checked">
+                                                        <div class="icon">
+                                                            <img src="~/Images/it_service/vnpayqr-qr.png" />
+                                                        </div>
+                                                        <div class="name">Thanh toán qua VnPay</div>
+                                                    </label>
+                                                </a>
+                                            </li>
+                                            <li class="method-select payment-3">
+                                                <a class="r-tabs-anchor">
+                                                    <label class="method-item" for="payment-3-checked">
+                                                        <div class="icon">
+                                                            <img src="~/Images/it_service/zalopay.svg" />
+                                                        </div>
+                                                        <div class="name">Thanh toán qua ví ZaloPay</div>
+                                                    </label>
+                                                </a>
+                                            </li>
+                                            <li class="method-select payment-5">
+                                                <a class=" r-tabs-anchor">
+                                                    <label class="method-item" for="payment-5-checked">
+                                                        <div class="icon">
+                                                            <img src="~/Images/it_service/paypal.png" />
+                                                        </div>
+                                                        <div class="name">Thanh toán qua PayPal</div>
+                                                    </label>
+                                                </a>
+                                            </li>
+                                            <li class="method-select payment-4">
+                                                <a class=" r-tabs-anchor">
+                                                    <label class="method-item" for="payment-1-checked">
+                                                        <div class="icon">
+                                                            <img src="~/Images/it_service/internetbanking.png">
+                                                        </div>
+                                                        <div class="name">Thanh toán qua Internet Banking</div>
+                                                    </label>
+                                                </a>
+                                            </li>
+                                            <li class="method-select payment-6">
+                                                <a class="r-tabs-anchor">
+                                                    <label class="method-item" for="payment-1-checked">
+                                                        <div class="icon">
+                                                            <img src="~/Images/it_service/tragop.png">
+                                                        </div>
+                                                        <div class="name">Thanh toán qua trả góp</div>
+                                                    </label>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- end list phương thức thanh toán -->
+                                        <!-- start thanh toan vnpayqr-->
+                                        <div class="method-content">
+                                            <div class="row content mt-2 payment-1-content collapse show">
+                                                <div class="col-xl-1 col-md-2 col-lg-2">
+                                                    <center><img alt="Thanh toán online qua mã QR" src="~/Images/it_service/delivery.png" style="width: 64px; height: auto;"></center>
+                                                </div>
+                                                <div class="col-xl-11 col-md-10 col-lg-10">
+                                                    <p>Thanh toán và nhận hàng</p>
+                                                    <p><span class="text-danger font_roboto_medium">Lưu ý:</span> Quý khách sẽ thanh toán bằng <strong class="font_roboto_medium">tiền mặt</strong> khi đơn vị vận chuyển giao hàng giao hàng tận nơi.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end thanh toan vnpayqr-->
+                                        <!-- start thanh toan khi nhận hàng -->
+                                        <div class="method-content">
+                                            <div class="row payment-2-content content mt-2 collapse">
+                                                <div class="col-xl-1 col-md-2 col-lg-2">
+                                                    <center><img src="~/Images/it_service/qrpay.png" style="width: 64px; height: auto;"></center>
+                                                </div>
+                                                <div class="col-xl-11 col-md-10 col-lg-10">
+                                                    <p>Thanh toán qua VnPay. </p>
+                                                    <p><span style="font-weight: bold; color: red;">Lưu ý:</span> Bạn cần tải ứng dụng <strong>Internet Banking</strong> trên điện thoại trước để thực hiện giao dịch quét QR-Pay.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end thanh toan khi nhận hàng -->
+                                        <!-- start thanh toan vnpayqr-->
+                                        <div class="method-content">
+                                            <div class="content mt-2 row payment-3-content collapse">
+                                                <div class="col-xl-1 col-md-2 col-lg-2">
+                                                    <center><img alt="Thanh toán qua ví Momo, ViettelPay" src="~/Images/it_service/Logo-zalopay.png" style="width: 64px; height: auto;"></center>
+                                                </div>
+                                                <div class="col-xl-11 col-md-10 col-lg-10">
+                                                    <p>Thanh toán qua ví ZaloPay </p>
+                                                    <p><span style="font-weight: bold; color: red;">Lưu ý:</span> Bạn cần tải ứng dụng <strong>ZaloPay</strong> trên điện thoại trước để thực hiện giao dịch. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end thanh toan vnpayqr-->
+                                        <!--start thanh toan bang thẻ quốc tế-->
+                                        <div class="method-content">
+                                            <div class="row content mt-2 payment-5-content collapse">
+                                                <div class="col-xl-1 col-md-2 col-lg-2">
+                                                    <center><img src="~/Images/it_service/paypal.png" style="width: 64px; height: auto;"></center>
+                                                </div>
+                                                <div class="col-xl-11 col-md-10 col-lg-10">
+                                                    <p>Hỗ trợ thẻ Visa, Master Card,...</p>
+                                                    <p>Thanh toán thông qua cổng thanh toán quốc tế PayPal</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end thanh toán bằng thẻ quốc tế-->
+                                    </div>
+                                </div>
+                            </section>
+                            <!--end::Section-->
+                        </div>
+                    </div>
+                    <!--end::Payment and Delivery-->
+                    <!--begin::Row-->
+                    <div class="row mb-20px infor-user-checkout">
+                        <div class="col-lg-7 col-md-6 col-12 info_total">
+                            @if (ViewBag.CountAddress > 0)//view này hiển thị khi bạn đã thêm địa chỉ trước đó trong trang cá nhân
+                            {
+                                <div class="user-page">
+                                    <h2 class="checkout-title">Thông tin người nhận</h2>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Họ tên *</label>
+                                            <input name="checkout_username" readonly id="checkout_username" value="@Model.checkout_username" class="form-control ck_username" />
+                                        </div><!-- End .col-sm-6 -->
+
+                                        <div class="col-sm-6">
+                                            <label>Số điện thoại *</label>
+                                            <input readonly type="text" name="checkout_phone_number" id="checkout_phone_number" value="@Model.checkout_phone_number" class="form-control ck_phone_num" />
+                                        </div><!-- End .col-sm-6 -->
+                                    </div>
+
+                                    <label>Địa chỉ *</label>
+                                    <input name="checkout_address" readonly id="checkout_address" value="@Model.checkout_address" class="form-control ck_address" />
+
+                                    <input type="hidden" class="ck_address_province" value="@Model.checkout_address_province" name="checkout_address_province" />
+                                    <input type="hidden" class="ck_address_district" value="@Model.checkout_address_district" name="checkout_address_district" />
+                                    <input type="hidden" class="ck_address_ward" value="@Model.checkout_address_ward" name="checkout_address_ward" />
+                                    <input type="hidden" class="ck_address_content" value="@Model.checkout_address_content" name="checkout_address_content" />
+
+                                    <label>Chú thích đơn hàng (Tùy chọn)</label>
+                                    <textarea class="form-control" cols="30" rows="4" maxlength="200" name="OrderNote" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: ghi chú đặc biệt cho giao hàng"></textarea>
+
+                                    <div class="form-group">
+                                        <a href="#" id="op_ckchangeaddress" class="ck_update_info fs-14px">Đổi địa chỉ nhận hàng</a>
+                                    </div>
+                                </div>
+                            }
+                            else //nếu chưa thêm địa chỉ thì sẽ dùng form này, nhưng khi bạn thêm địa chỉ mới ở trang thanh toán xong thì view form này sẽ tự hiện lên
+                            {
+                                <div class="user-page ck_notexist_address">
+                                    <h2 class="checkout-title">Thông tin người nhận</h2>
+                                    <div class="user-form d-flex justify-content-center">
+                                        <div class="d-flex">
+                                            <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <rect id="Rectangle-185" fill="#8a2be2" x="4" y="11" width="16" height="2" rx="1"></rect>
+                                                <rect id="Rectangle-185-Copy" fill="#8a2be2" opacity="0.5" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"></rect>
+                                            </svg>
+                                            <a style="cursor:pointer;" id="popupcreateaddress"><span style="color: #8a2be2;">Thêm địa chỉ nhận hàng</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div hidden class="user-page create_order_address">
+                                    <h2 class="checkout-title">Thông tin người nhận</h2>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Họ tên *</label>
+                                            <input name="checkout_username" readonly id="checkout_username" value="@Model.checkout_username" class="form-control order_address_name" />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label>Số điện thoại *</label>
+                                            <input type="text" readonly name="checkout_phone_number" id="checkout_phone_number" value="@Model.checkout_phone_number" class="form-control order_address_phone" />
+                                        </div>
+                                    </div>
+
+                                    <label>Địa chỉ *</label>
+                                    <input name="checkout_address" readonly id="checkout_address" value="@Model.checkout_address" class="form-control order_address" />
+
+                                    <input type="hidden" class="ck_address_province" value="@Model.checkout_address_province" name="checkout_address_province" />
+                                    <input type="hidden" class="ck_address_district" value="@Model.checkout_address_district" name="checkout_address_district" />
+                                    <input type="hidden" class="ck_address_ward" value="@Model.checkout_address_ward" name="checkout_address_ward" />
+                                    <input type="hidden" class="ck_address_content" value="@Model.checkout_address_content" name="checkout_address_content" />
+
+                                    <label>Chú thích đơn hàng (Tùy chọn)</label>
+                                    <textarea class="form-control" cols="30" rows="4" name="OrderNote" maxlength="200" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: ghi chú đặc biệt cho giao hàng"></textarea>
+                                </div>
+                            }
+                        </div>
+                        <!--end thông tin nhận hàng-->
+                        <!--begin::Col-->
+                        <div class="col-lg-5 col-md-6 col-12 info_total">
+                            <div class="shopping-cart-cart pb-order--now">
+                                <div class="summary">
+                                    <h3 class="summary-title">Đơn hàng của bạn</h3><!-- End .summary-title -->
+                                    <table class="table table-summary">
+                                        <tbody>
+                                            <tr class="summary-subtotal">
+                                                <td>Tạm tính:</td>
+                                                <td>@price.ToString("#,0₫", culture.NumberFormat)</td>
+                                            </tr><!-- End .summary-subtotal -->
+                                            <tr>
+                                                <td>Giảm giá:</td>
+                                                @if (discountPrice == 0)
+                                                {
+                                                    <td>0₫</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-success">@discountPrice.ToString("-#,0₫", culture.NumberFormat)</td>
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <td>Vận chuyển:</td>
+                                                <td>@shippingFee.ToString("#,###₫", culture.NumberFormat)</td>
+                                            </tr>
+                                            <tr class="summary-total">
+                                                <td>Tổng:</td>
+                                                <td>@total.ToString("#,0₫", culture.NumberFormat)</td>
+                                            </tr><!-- End .summary-total -->
+                                        </tbody>
+                                    </table><!-- End .table table-summary -->
+                                    @if (ViewBag.CountAddress > 0)
+                                    {
+                                        <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block" id="submit_order">
+                                            <span>Đặt hàng</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" disabled class="btn bg-button w-100 mt-2 mb-1 btn_submit_order">Đặt hàng ngay</button>
+                                        <div class="text-danger center message_order">(Vui lòng thêm địa chỉ nhận hàng)</div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                </form>
+            </div><!-- End .container -->
+        </div><!-- End .checkout -->
+    </div><!-- End .page-content -->
+</main>
+
+
+<div class="modal fade create_modal" id="ckchangeaddress">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Đổi địa chỉ nhận hàng</h4>
+                <button type="button" class="close_modal close">
+                    <span aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
+                                <rect fill="#000000" x="0" y="7" width="16" height="2" rx="1"></rect>
+                                <rect fill="#000000" opacity="0.5" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)" x="0" y="7" width="16" height="2" rx="1"></rect>
+                            </g>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body mt-3">
+                <form method="post" id="change_order__address">
+                    <div class="d-flex flex-column mb-3 fv-row fv-plugins-icon-container">
+                        @{ 
+                            int input = 9000; int label = 9000;
+                            foreach (var item in ViewBag.ListAdress)
+                            {
+                                if (item.account_address_default == true)
+                                {
+                                    <div class="mb-3 d-flex">
+                                        <input name="account_address_id" class="mt-1 check_change_address" checked="checked" id="8999" type="radio" value="@item.account_address_id" />
+                                        <label for="8999" class="ps-2 user-select-none select_address labels" style="cursor: pointer; padding-top: 5px">
+                                            <span class="get_acc_username">@item.account_address_username</span>
+                                            <span class="get_acc_phone_num">@item.account_address_phonenumber</span>
+                                            <span class="get_address">
+                                                <span class="get_address_content">@item.account_address_content</span>,
+                                                <span class="get_address_ward">@item.Ward.type @item.Ward.ward_name</span>,
+                                                <span class="get_address_district">@item.District.type @item.District.district_name</span>,
+                                                <span class="get_address_province">@item.Province.province_name</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mb-3 d-flex">
+                                        <input name="account_address_id" class="mt-1 check_change_address" type="radio" id="@(input+=1)" value="@item.account_address_id" />
+                                        <label for="@(label+=1)" class="ps-2 user-select-none select_address labels" style="cursor: pointer; padding-top: 5px">
+                                            <span class="get_acc_username">@item.account_address_username</span>
+                                            <span class="get_acc_phone_num">@item.account_address_phonenumber</span>
+                                            <span class="get_address">
+                                                <span class="get_address_content">@item.account_address_content</span>,
+                                                <span class="get_address_ward">@item.Ward.type @item.Ward.ward_name</span>,
+                                                <span class="get_address_district">@item.District.type @item.District.district_name</span>,
+                                                <span class="get_address_province">@item.Province.province_name</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-outline-secondary close_modal">Quay lại</button>
+                        <button type="button" onclick="Change_order_address_confirm()" class="btn btn-outline-primary-2">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::change order address-->
+<!-- Modal New Address-->
+<div class="modal fade modal-wrapper" id="ModalOrderAddCreate">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right text-uppercase">Thêm địa chỉ mới</h4>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-innner-area">
+                    <form method="post" id="create_address__order">
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-md-6">
+                                <label class="labels">Họ tên <small class="text-danger">(*)</small></label>
+                                <input type="text" maxlength="20" class="form-control" id="address_name" value="@User.Identity.GetName()" placeholder="Nhập họ tên" name="account_address_username">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">Số điện thoại <small class="text-danger">(*)</small></label>
+                                <input type="text" maxlength="10" class="form-control" id="address_phone" placeholder="Số điện thoại" value="@User.Identity.GetPhoneNumber()" name="account_address_phonenumber">
+                            </div>
+                        </div>
+                        <div class="row mt-3 border-bottom">
+                            <div class="col-md-4">
+                                <label class="labels">Tỉnh/Thành phố <small class="text-danger">(*)</small></label>
+                                <select name="province_id" id="province" class="form-select select2-hidden-accessible">
+                                    <option value="">Tỉnh/Thành Phố</option>
+                                    @foreach (var provice in ViewBag.ProvincesList)
+                                    {
+                                        <option value="@provice.province_id">@provice.province_name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="labels">Quận/Huyện <small class="text-danger">(*)</small></label>
+                                <select disabled id="district" name="district_id" class="form-select select2-hidden-accessible cursor-disable">
+                                    <option value="">Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="labels">Phường/Xã <small class="text-danger">(*)</small></label>
+                                <select disabled name="ward_id" id="ward" class="form-select select2-hidden-accessible cursor-disable">
+                                    <option value="">Phường/Xã</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <label class="labels">Địa chỉ cụ thể <small class="text-danger">(*)</small></label>
+                            <input type="text" maxlength="50" class="form-control" id="address_content" placeholder="Nhập địa chỉ cụ thể" name="account_address_content">
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="reset" class="btn btn-secondary me-3"><i class="fa fa-refresh"></i> Làm mới</button>
+                            <button type="button" onclick="SaveAddressOrder()" class="btn btn-primary"><i class="fa fa-save"></i> Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var radioButtons = document.querySelectorAll('input[name="account_address_id"]');
+    var previousSelected = null; // Tạo biến để lưu label được chọn trước đó
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener('click', function () {
+            if (previousSelected) {
+                previousSelected.classList.remove('text-danger', 'active'); // Xóa lớp "text-danger active" của label trước đó
+            }
+            var label = this.nextElementSibling; // Lấy label của nút radio đang được chọn
+            label.classList.add('text-danger', 'active'); // Thêm lớp "text-danger active" vào label hiện tại
+            previousSelected = label; // Gán label hiện tại vào biến previousSelected
+        });
+    });
+</script>
+

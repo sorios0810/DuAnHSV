@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Domain.Entities.ParentCategory>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/news/genre/@item.slug" class="sf-with-ul">@item.name</a>
+        <ul>
+            @foreach (var childcategory in ViewBag.newscategory)
+            {
+                if (childcategory.parentcategory_id == item.parentcategory_id && childcategory.status == "1")
+                {
+                    <li><a href="/news/list_post/@childcategory.slug">@childcategory.name</a></li>
+                }
+            }
+        </ul>
+    </li>
+}
+
+

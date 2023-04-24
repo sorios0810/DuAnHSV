@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Decription">
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Assets/Client/images/icons/apple-touch-icon.png">
+    <link rel="manifest" href="~/Assets/Client/images/icons/site.html">
+    <link rel="mask-icon" href="~/Assets/Client/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="icon" href="~/logo.ico" type="image/x-icon" />
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="application-name" content="">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="~/Assets/Client/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="~/Assets/Client/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/owl-carousel/owl.carousel.css" />
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/owl-carousel/owl.theme.default.css" />
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/jquery.countdown.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="~/Assets/Client/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/nouislider/nouislider.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/skins/skin-demo-13.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/demos/demo-13.css" />
+    <!-- Loader CSS -->
+    <link rel="stylesheet" href="~/Assets/Client/css/loaders/css-loader2.css" />
+    <!-- Profile Account CSS -->
+    <link rel="stylesheet" href="~/Assets/Client/css/profile.css" />
+    <!-- Color CSS -->
+    @*<link rel="stylesheet" href="~/Assets/Client/css/colors/colors1.css" />*@
+    <!-- DatetimePicker CSS -->
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/jquery.datetimepicker.css" />
+    <!-- Sweeter Alert CSS -->
+    <link rel="stylesheet" href="~/Assets/Client/css/sweetalert2.min.css" />
+    <!-- Font-Awesomes CSS -->
+    <link rel="stylesheet" href="~/Assets/Client/css/font-awesome.min.css" />
+    <!-- Jquery-ui CSS -->
+    <link rel="stylesheet" href="~/Assets/Client/css/plugins/jquery-ui.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+
+
+</head>
+
+<body>
+    <div class="page-wrapper">
+        @Html.Partial("_HeaderLayout")
+
+        @RenderBody()
+
+        @Html.Partial("_MessageAlert")
+
+        @Html.Partial("_FooterLayout")
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+    @*@Html.Action("MobileMenu", "Product")*@
+
+    <!-- Plugins JS File -->
+    <script src="~/Assets/Client/js/jquery.min.js"></script>
+    <script src="~/Assets/Client/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.hoverIntent.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.waypoints.min.js"></script>
+    <script src="~/Assets/Client/js/superfish.min.js"></script>
+    <script src="~/Assets/Client/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/Client/js/wNumb.js"></script>
+    <script src="~/Assets/Client/js/bootstrap-input-spinner.js"></script>
+    <script src="~/Assets/Client/js/jquery.elevateZoom.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.plugin.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.countdown.min.js"></script>
+    @*<script src="~/Assets/Client/js/nouislider.min.js"></script>*@
+
+    <!-- Main JS File -->
+    <script src="~/Assets/Client/js/main.js"></script>
+    <script src="~/Assets/Client/js/demos/demo-13.js"></script>
+
+    <!-- Include: Toast, Sweet Alert, Bootbox Js-->
+    @Scripts.Render("~/bundles/toast")
+
+    <!-- Custom thông báo -->
+    @Scripts.Render("~/bundles/customtoastr")
+
+    <!-- Ràng buộc form nhập -->
+    @Scripts.Render("~/bundles/jqueryinputmask")
+
+    <!-- Cookie để lưu giỏ hàng,... -->
+    @Scripts.Render("~/bundles/cookie")
+
+    <!-- Common dùng liên quan đến add sản phẩm vào giỏ hàng -->
+    @Scripts.Render("~/bundles/common")
+
+    <!--script xem ảnh full màn, dùng trong product detail khi bấm vào từng ảnh sẽ hiển thị ảnh fullscreen-->
+    @Scripts.Render("~/bundles/fslightbox")
+
+    <!-- Custom search: gợi ý khi gõ chữ vào thanh search-->
+    @*@Scripts.Render("~/bundles/customsearch")*@
+    <script src="~/Assets/Client/js/search_post.js"></script>
+
+    <!-- JQuery-Ui V.1.12.1  -->
+    <script src="~/Assets/Client/js/jquery-ui-1.12.1.js"></script>
+
+    <!--JQuery V.3.6.0 -->
+    @*<script src="~/Assets/Client/js/jquery-3.6.0.min.js"></script>*@
+
+    <!-- Signalr -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+
+    @*<script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Assets/Client/js/slick.js"></script>
+
+    <script src="~/Assets/Client/js/sticky.compile.js"></script>*@
+
+    @RenderSection("scripts", required: false)
+</body>
+<!-- molla/index-13.html  22 Nov 2019 09:59:31 GMT -->
+</html>

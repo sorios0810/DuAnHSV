@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Kích hoạt tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Verify Alert Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                <div class="card-body">
+                    <!-- Verify Alert -->
+                    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+                    {
+                        <div class="center">
+                            <span class="material-icons ic_success_verify">check_circle</span>
+                        </div>
+                        <p class="center h3 mt-3 font_family_ChakraPetch_bold">Đã xác thực</p>
+                        <p class="center text-center">Tài khoản của bạn đã được kích hoạt thành công.</p>
+                        <div class="center mt-4">
+                            <a href="@Url.Action("SignIn", "Account")" style=" border-radius: 0.7rem" class="btn bg-button button_verify_account">Đăng nhập</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="center">
+                            <span class="material-icons ic_fail_verify">error</span>
+                        </div>
+                        <p class="center mt-3 h5 text-center text-danger" style=" margin-bottom: 110px;">
+                            @ViewBag.Message
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Verify Alert Area End Here -->

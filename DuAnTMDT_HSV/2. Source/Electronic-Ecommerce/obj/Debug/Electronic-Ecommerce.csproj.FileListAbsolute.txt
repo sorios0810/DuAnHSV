@@ -1,0 +1,460 @@
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Electronic-Ecommerce.dll.config
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Electronic-Ecommerce.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Electronic-Ecommerce.pdb
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\csc.exe
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\csc.exe.config
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\csc.rsp
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\csi.exe
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\csi.exe.config
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\csi.rsp
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.Managed.Core.targets
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Buffers.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Collections.Immutable.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Memory.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Numerics.Vectors.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Reflection.Metadata.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\vbc.exe
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\vbc.exe.config
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\vbc.rsp
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\VBCSCompiler.exe
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\roslyn\VBCSCompiler.exe.config
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Antlr3.Runtime.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Autofac.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\AutoMapper.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\BouncyCastle.Crypto.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\EntityFramework.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\EntityFramework.SqlServer.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Facebook.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\log4net.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Core.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Owin.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Cookies.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Facebook.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Google.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.OAuth.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Web.Infrastructure.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Newtonsoft.Json.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Owin.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\PagedList.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\PagedList.Mvc.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\PayPal.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\QRCoder.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\SlugGenerator.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Buffers.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Diagnostics.DiagnosticSource.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Memory.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Numerics.Vectors.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Text.Encodings.Web.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Threading.Tasks.Extensions.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Helpers.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Mvc.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Optimization.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Razor.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.WebPages.Deployment.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.WebPages.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.WebPages.Razor.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\WebGrease.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Autofac.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\AutoMapper.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\EntityFramework.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\EntityFramework.SqlServer.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Facebook.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\log4net.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Core.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Owin.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Bcl.AsyncInterfaces.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Cookies.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Facebook.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Google.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Microsoft.Owin.Security.OAuth.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Newtonsoft.Json.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\PagedList.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\PagedList.Mvc.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\PayPal.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Buffers.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Diagnostics.DiagnosticSource.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Memory.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Numerics.Vectors.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Threading.Tasks.Extensions.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Helpers.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Mvc.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Optimization.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.Razor.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.WebPages.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.WebPages.Deployment.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\System.Web.WebPages.Razor.xml
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\bin\Antlr3.Runtime.pdb
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.AssemblyReference.cache
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.CoreCompileInputs.cache
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.CopyComplete
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.dll
+D:\SOURCE CÔNG TY\Electronic-Ecommerce\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Electronic-Ecommerce.dll.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Electronic-Ecommerce.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Electronic-Ecommerce.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\csc.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\csc.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\csc.rsp
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\csi.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\csi.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\csi.rsp
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.Managed.Core.targets
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Buffers.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Collections.Immutable.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Memory.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Numerics.Vectors.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Reflection.Metadata.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\vbc.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\vbc.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\vbc.rsp
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\VBCSCompiler.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\roslyn\VBCSCompiler.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Antlr3.Runtime.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Autofac.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\AutoMapper.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\BouncyCastle.Crypto.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\EntityFramework.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\EntityFramework.SqlServer.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Facebook.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\log4net.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Core.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Cookies.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Facebook.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Google.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.OAuth.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Web.Infrastructure.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Newtonsoft.Json.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\PagedList.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\PagedList.Mvc.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\PayPal.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\QRCoder.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\SlugGenerator.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Buffers.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Diagnostics.DiagnosticSource.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Memory.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Numerics.Vectors.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Threading.Tasks.Extensions.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Helpers.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Mvc.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Optimization.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Razor.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Deployment.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Razor.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\WebGrease.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Autofac.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\AutoMapper.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\EntityFramework.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\EntityFramework.SqlServer.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Facebook.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\log4net.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Core.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Owin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Bcl.AsyncInterfaces.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Cookies.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Facebook.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Google.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.OAuth.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Newtonsoft.Json.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\PagedList.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\PagedList.Mvc.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\PayPal.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Buffers.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Diagnostics.DiagnosticSource.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Memory.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Numerics.Vectors.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Threading.Tasks.Extensions.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Helpers.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Mvc.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Optimization.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.Razor.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Deployment.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Razor.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Antlr3.Runtime.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.AssemblyReference.cache
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.CoreCompileInputs.cache
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.CopyComplete
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Domain.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Domain.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Domain.dll.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Syncfusion.Compression.Base.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Syncfusion.Licensing.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Syncfusion.XlsIO.Base.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Syncfusion.Compression.Base.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Syncfusion.XlsIO.Base.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.Rest.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.PlatformServices.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Core.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Drive.v3.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.PlatformServices.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Storage.v1.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Cloud.Storage.V1.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.ValueTuple.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.Rest.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.Rest.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Core.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Core.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Drive.v3.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Drive.v3.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Storage.v1.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Apis.Storage.v1.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Cloud.Storage.V1.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Google.Cloud.Storage.V1.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.ValueTuple.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\Firebase.Storage.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\FirebaseAdmin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Collections.Immutable.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\FirebaseAdmin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSVTech\2. Source\Electronic-Ecommerce\bin\System.Collections.Immutable.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Electronic-Ecommerce.dll.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Electronic-Ecommerce.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Electronic-Ecommerce.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\csc.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\csc.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\csc.rsp
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\csi.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\csi.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\csi.rsp
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.Managed.Core.targets
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Buffers.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Collections.Immutable.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Memory.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Numerics.Vectors.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Reflection.Metadata.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\vbc.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\vbc.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\vbc.rsp
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\VBCSCompiler.exe
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\roslyn\VBCSCompiler.exe.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Antlr3.Runtime.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Autofac.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\AutoMapper.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\BouncyCastle.Crypto.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Domain.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\EntityFramework.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\EntityFramework.SqlServer.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Facebook.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Firebase.Storage.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\FirebaseAdmin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.Rest.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.PlatformServices.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Core.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Drive.v3.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.PlatformServices.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Storage.v1.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Cloud.Storage.V1.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\log4net.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Core.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Bcl.AsyncInterfaces.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Cookies.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Facebook.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Google.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.OAuth.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Web.Infrastructure.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Newtonsoft.Json.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Owin.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\PagedList.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\PagedList.Mvc.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\PayPal.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\QRCoder.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\SlugGenerator.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Syncfusion.Compression.Base.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Syncfusion.Licensing.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Syncfusion.XlsIO.Base.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Buffers.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Collections.Immutable.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Diagnostics.DiagnosticSource.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Memory.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Numerics.Vectors.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Threading.Tasks.Extensions.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.ValueTuple.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Helpers.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Mvc.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Optimization.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Razor.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Deployment.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Razor.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\WebGrease.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Domain.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Domain.dll.config
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Autofac.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\AutoMapper.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\EntityFramework.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\EntityFramework.SqlServer.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Facebook.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\FirebaseAdmin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.Rest.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Api.Gax.Rest.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Auth.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Core.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Core.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Drive.v3.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Drive.v3.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Storage.v1.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Apis.Storage.v1.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Cloud.Storage.V1.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Google.Cloud.Storage.V1.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\log4net.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Core.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.Owin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Bcl.AsyncInterfaces.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Cookies.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Facebook.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.Google.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Microsoft.Owin.Security.OAuth.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Newtonsoft.Json.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\PagedList.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\PagedList.Mvc.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\PayPal.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Syncfusion.Compression.Base.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Syncfusion.XlsIO.Base.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Buffers.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Collections.Immutable.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Diagnostics.DiagnosticSource.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Memory.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Numerics.Vectors.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Threading.Tasks.Extensions.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.ValueTuple.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Helpers.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Mvc.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Optimization.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.Razor.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Deployment.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\System.Web.WebPages.Razor.xml
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Antlr3.Runtime.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.AssemblyReference.cache
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.CoreCompileInputs.cache
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.csproj.CopyComplete
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.dll
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\obj\Debug\Electronic-Ecommerce.pdb
+D:\SOURCE CÔNG TY\DuAnTMDT_HSV\2. Source\Electronic-Ecommerce\bin\Firebase.Auth.dll

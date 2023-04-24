@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Domain.Entities.ParentGenre>
+
+<div class="dropdown category-dropdown show is-on" data-visible="true">
+    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Danh mục sản phẩm">
+        Danh mục sản phẩm
+    </a>
+
+    <div class="dropdown-menu">
+        <nav class="side-nav">
+            <ul class="menu-vertical sf-arrows">
+                @foreach (var parent in Model)
+                {
+                    <li class="megamenu-container">
+                        <a class="sf-with-ul" href="/category/@parent.slug">@parent.name</a>
+                        @if (parent.Genres.Count > 0)
+                        {
+                            <div class="megamenu">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="menu-col">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="menu-title"><a href="/brand/@parent.slug">Thương hiệu</a></div><!-- End .menu-title -->
+                                                    <ul>
+                                                        @foreach (var brand in ViewBag.Brands)
+                                                        {
+                                                            <li><a href="/brand/@brand.slug">@brand.brand_name</a></li>
+                                                        }
+                                                    </ul>
+
+                                                    <div class="menu-title">Theo giá</div><!-- End .menu-title -->
+                                                    <ul>
+                                                        <li><a href="#">Dưới 1 triệu</a></li>
+                                                        <li><a href="#">Từ 1 - 3 triệu</a></li>
+                                                        <li><a href="#">Từ 3 - 5 triệu</a></li>
+                                                        <li><a href="#">Từ 5 - 10 triệu</a></li>
+                                                        <li><a href="#">Trên 10 triệu</a></li>
+                                                    </ul>
+
+                                                    <div class="menu-title">Theo nhu cầu</div><!-- End .menu-title -->
+                                                    <ul>
+                                                        <li><a href="#">Văn phòng</a></li>
+                                                        <li><a href="#">Gaming</a></li>
+                                                        <li><a href="#">Lập trình</a></li>
+                                                        <li><a href="#">AutoCAD</a></li>
+                                                        <li><a href="#">Media</a></li>
+                                                    </ul>
+                                                </div><!-- End .col-md-6 -->
+
+                                                <div class="col-md-6">                                                   
+
+                                                    @foreach (var genre in parent.Genres)
+                                                    {
+                                                        <div class="menu-title"><a href="/category/@genre.slug">@genre.genre_name</a></div><!-- End .menu-title -->
+                                                        if (genre.GenreDetails.Count > 0)
+                                                        {
+                                                            <ul>
+                                                                @foreach (var detail in genre.GenreDetails)
+                                                                {
+                                                                    <li><a href="/category/@detail.slug">@detail.genre_detail_name</a></li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    }
+                                                </div><!-- End .col-md-6 -->
+
+                                            </div><!-- End .row -->
+                                        </div><!-- End .menu-col -->
+                                    </div><!-- End .col-md-8 -->
+
+                                    <div class="col-md-4">
+                                        <div class="banner banner-overlay">
+                                            <a href="category.html" class="banner banner-menu">
+                                                <img src="~/Assets/Client/images/demos/demo-13/menu/banner-1.jpg" alt="Banner">
+                                            </a>
+                                        </div><!-- End .banner banner-overlay -->
+                                    </div><!-- End .col-md-4 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .megamenu -->
+                        }
+                    </li>
+
+                }
+            </ul><!-- End .menu-vertical -->
+        </nav><!-- End .side-nav -->
+    </div><!-- End .dropdown-menu -->
+</div><!-- End .category-dropdown -->
+<script>
+    $('.category-dropdown .dropdown-toggle').on('click', function (e) {
+        e.preventDefault();
+        var dropdownMenu = $(this).next('.dropdown-menu');
+        if (dropdownMenu.is(':hidden')) {
+            dropdownMenu.slideDown(300);
+            $(this).attr('aria-expanded', 'true');
+        } else {
+            dropdownMenu.slideUp(300);
+            $(this).attr('aria-expanded', 'false');
+        }
+    });
+
+</script>

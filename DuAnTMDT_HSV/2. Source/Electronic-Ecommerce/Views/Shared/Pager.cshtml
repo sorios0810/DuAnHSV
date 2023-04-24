@@ -1,0 +1,166 @@
+﻿@using Electronic_Ecommerce.Common
+@model PagedList.IPagedList
+
+@{
+    var query = "";
+}
+
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        @for (var i = 0; i < Request.QueryString.Count; i++)
+        {
+            if (Request.QueryString.AllKeys[i] != "page")
+            {
+                query += Request.QueryString.AllKeys[i] + "=" + Request.QueryString[i];
+            }
+        }
+
+        @{
+            var prevUrl = "";
+            if (Model.HasPreviousPage)
+            {
+                prevUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { page = Model.PageNumber - 1 });
+                if (!string.IsNullOrEmpty(query))
+                {
+                    prevUrl += "&" + query;
+                }
+            }
+            else
+            {
+                prevUrl = "";
+            }
+        }
+
+        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+            <a class="page-link page-link-prev" href="@prevUrl" aria-label="Previous">
+                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Trở lại
+            </a>
+        </li>
+
+
+        @foreach (var item in GetPagination())
+        {
+            var url = Url.Action(item.Action, item.Controller, new { page = item.Page });
+            if (!string.IsNullOrEmpty(query))
+            {
+                url += "&" + query;
+            }
+            <li class="@(item.IsActive ? "active" : item.Page <= 0 ? "disabled" : "") page-item">
+                @if (item.Page <= 0)
+                {
+                    <a class="page-link">@item.Display</a>
+                }
+                else
+                {
+                    <a class="page-link" href="@url">@item.Display</a>
+                }
+            </li>
+        }
+
+        @{
+            var nextUrl = "";
+            if (Model.HasNextPage)
+            {
+                nextUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { page = Model.PageNumber + 1 });
+                if (!string.IsNullOrEmpty(query))
+                {
+                    nextUrl += "&" + query;
+                }
+                else
+                {
+                    nextUrl = "";
+                }
+            }
+        }
+        <li class="page-item">
+            <a class="page-link page-link-next" href="@nextUrl" aria-label="Next">
+                Tiếp theo <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+@{
+    List<Pagination> GetPagination()
+    {
+        var curPage = Model.PageNumber;
+        var totalPage = Model.PageCount;
+        var curController = ViewContext.RouteData.Values["controller"].ToString();
+        var curAction = ViewContext.RouteData.Values["action"].ToString();
+        var pager = new List<Pagination>();
+
+        if (totalPage == 0)
+        {
+            return pager;
+        }
+
+        // Thêm phân trang cho trang hiện tại
+        pager.Add(new Pagination
+        {
+            Controller = curController,
+            Action = curAction,
+            IsActive = true,
+            Page = curPage,
+            Display = curPage.ToString()
+        });
+        if (curPage + 1 <= totalPage)
+        {
+            // Thêm phân trang cho trang sau hiện tại
+            pager.Add(new Pagination
+            {
+                Controller = curController,
+                Action = curAction,
+                IsActive = false,
+                Page = curPage + 1,
+                Display = (curPage + 1).ToString()
+            });
+            if (curPage + 1 < totalPage)
+            {
+                pager.Add(new Pagination
+                {
+                    Page = -1,
+                    IsActive = false,
+                    Display = "..."
+                });
+                pager.Add(new Pagination
+                {
+                    Controller = curController,
+                    Action = curAction,
+                    IsActive = false,
+                    Page = totalPage,
+                    Display = totalPage.ToString()
+                });
+            }
+        }
+        if (curPage - 2 >= 0)
+        {
+            pager.Insert(0, new Pagination
+            {
+                Controller = curController,
+                Action = curAction,
+                IsActive = false,
+                Page = curPage - 1,
+                Display = (curPage - 1).ToString()
+            });
+            if (curPage - 2 > 0)
+            {
+                pager.Insert(0, new Pagination
+                {
+                    Page = -1,
+                    IsActive = false,
+                    Display = "..."
+                });
+                pager.Insert(0, new Pagination
+                {
+                    Controller = curController,
+                    Action = curAction,
+                    IsActive = false,
+                    Page = 1,
+                    Display = "1"
+                });
+            }
+        }
+        return pager;
+    }
+}
